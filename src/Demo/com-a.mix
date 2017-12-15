@@ -1,0 +1,7 @@
+<template>
+<text>header</text>
+    <slot></slot>
+<text>footer</text>
+</template>
+
+export default{}

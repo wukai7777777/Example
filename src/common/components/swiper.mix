@@ -1,0 +1,84 @@
+<template>
+	<swiper style="indicator-color: rgba(0,0,0,0.2); indicator-selected-color: #FFFF00; indicator-size: 10px;" class="swiper" autoplay="{{autoPlay}}" interval="{{interval}}" indicator="{{indicator}}">
+		<block for="{{banners}}">
+			<image class="banners" onclick="goToBnaner($item.redirectUrl)" src="{{$item.imageUrl}}"></image>
+		</block>
+	</swiper>
+</template>
+
+<style lang="less">
+	.swiper-wrap{
+		padding-top: 30px;
+		padding-bottom: 30px;
+		.swiper{
+			width: 100%;
+			flex-direction: column;
+			width: 100%;
+			slide-width: 100%;
+			height: 250px;
+			flex-shrink: 0;
+		}
+	}
+</style>
+
+
+<script>
+	import fetch from '@system.fetch'
+	import network from '@system.network'
+	import prompt from '@system.prompt'
+	import webview from '@system.webview'
+	export default{
+		props: [
+			'banners',
+			"autoPlay",
+			"interval",
+			"indicator"
+		],
+		onReady() {
+		},
+		goToBnaner(url) {
+			console.log(url)
+			webview.loadUrl({
+				url: url
+			})
+		}
+		// getBannerData() {
+		// 	let self = this;
+		// 	network.getType({
+		// 		success: function(data){
+		// 		  	if(data.type !== 'none'){
+		// 		  		console.log(2222)
+		// 		  		self.loadBanner()
+		// 		  	} else {
+		// 		  		prompt.showToast({
+		// 				  message:'无网络'
+		// 				})
+		// 		  	}
+		// 		}
+		// 	})
+		// },
+		// loadBanner() {
+		// 	let self = this;
+
+		// 	fetch.fetch({
+		// 		url: "https://jz-c.doumi.com/api/v3/client/message/index",
+		// 		dada: {
+		// 			userId: 13215433,
+		// 			platform: 'android',
+		// 			deviceToken: 'c6a1341191398631a198c02cf6f26604',
+		// 		},
+		// 		header: {
+		// 			accessToken: "LmRlaxBbMj/BaaMW2kPiQP0SZriZ/lJPoUwjhppDYhWNkradyU4XOvEZk2aaczK0zFfT7Zi6"
+		// 		},
+		// 		success(data) {
+		// 			console.log(JSON.stringify(data))
+		// 		},
+		// 		fail(data, code) {
+		// 			console.log(JSON.stringify(data))
+		// 			console.log(JSON.stringify(code))
+		// 		}
+
+		// 	})
+		// }
+	}
+</script>

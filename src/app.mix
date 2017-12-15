@@ -1,0 +1,10 @@
+<script>
+  /**
+   * 应用级别的环境配置，不是页面级别，一般不建议对该文件改动；
+   * 注意: 不要删除下面的注释，它会在编译时被替换为manifest.json配置
+   */
+   import './common/js/config.js'
+  export default {
+    /**manifest**/
+  }
+</script>

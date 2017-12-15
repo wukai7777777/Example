@@ -1,0 +1,304 @@
+	<import src="../common/components/bottom-loading.mix" name="bottom-loading"></import>
+	<import src="../common/components/stack.mix" name="layered"></import>
+	<template>
+		<layered active="{{current}}">
+			<list onscrollBottom="getMsglist" class="msg-list">
+				<block for="{{item in datalist}}" if="item.data.data.length != 0">
+					<list-item class="mod-list-item" type="{{(item.data.templateType == 2) ? 'mod-list-item' : 'mod-list-item1'}}">
+						<text class="msg-time">{{item.create_at}}</text>
+						<div if="{{item.data.templateType == 2}}" class="msg-info">
+							<block for="{{(index, list) in item.data.data}}">
+								<div class="mod-list mod-big" if="{{index==0 && list.orderSort==1}}" onclick="gotoDetail(list.redirectUrl)">
+									<stack class="stack">
+										<image  class="product-image" src="{{list.imageUrl}}"></image>
+										<text class="product-title" show="{{list.title}}">{{list.title}}</text>
+									</stack>
+								</div>
+								<div class="mod-list" else onclick="gotoDetail(list.redirectUrl)">
+									<div class="bor-b">
+										<text class="product-title" show="{{list.title}}">{{list.title}}</text>
+										<image  class="product-image" src="{{list.imageUrl}}"></image>
+									</div>
+								</div>
+							</block>
+						</div>
+						<div class="msg-info" elif="{{item.data.templateType == 1}}" onclick="gotoDetail(item.data.data[0].redirectUrl)">
+							<text class="msg-tit" show="{{item.data.data[0].title}}">{{item.data.data[0].title}}</text>
+							<image class="msg-img" show="{{item.data.data[0].imageUrl}}" src="{{item.data.data[0].imageUrl}}"></image>
+							<text class="msg-cont" show="{{item.data.data[0].description}}">{{item.data.data[0].description}}</text>
+							<text class="msg-opt">查看详情 <span class="awrr"></span></text>
+						</div>
+					</list-item>
+				</block>
+
+
+				<list-item type="bottom-loading">
+					<bottom-loading loading="{{loading}}" no-data="{{noData}}"></bottom-loading>
+				</list-item>
+			</list>
+		</layered>
+	</template>
+
+	<style lang="less">
+		.msg-list{
+			background-color: #f7f7f7;
+			padding-bottom: 100px;
+			height: 100%;
+			.mod-list-item{
+				flex-direction: column;
+				padding-top: 48px;
+				padding-right: 24px;
+				padding-left: 24px;
+				.msg-time{
+					flex: 1;
+					text-align: center;
+					color: #999999;
+					font-size: 20px;
+					line-height: 18px;
+					margin-bottom: 32px
+				}
+				.msg-info{
+					flex-direction: column;
+					border-color: #eeeeee;
+					border-width: 1px;
+					background-color: #ffffff;
+					border-radius: 2px;
+					padding:20px 20px 0;
+					.mod-big{
+						padding-bottom: 20px;
+						.product-title{
+							width: 100%;
+							height: 68px;
+							line-height: 68px;
+							padding:0 24px;
+							color: #ffffff;
+							font-size: 32px;
+							background-color: rgba(0,0,0,0.5);
+							lines:1;
+							text-overflow: ellipsis;
+						}
+					}
+					.mod-list{
+						.stack{
+							flex: 1;
+							align-items: flex-end;
+							.product-image{
+								flex: 1;
+								flex-shrink: 0;
+								background-color: #eeeeee;
+							}
+						}
+						.bor-b{
+							flex: 1;
+							border-top-width: 0.5px;
+							border-color: #cccccc;
+							padding-bottom: 20px;
+							padding-top: 20px;
+							.product-title{
+								flex: 1;
+								font-size: 28px;
+								height: 88px;
+								line-height: 44px;
+								lines:  2;
+								text-overflow: ellipsis;
+							}
+							.product-image{
+								width: 88px;
+								height: 88px;
+								background-color: #eeeeee;
+								margin-left: 10px;
+								flex-shrink: 0;
+							}
+						}
+					}
+					.msg-tit{
+						font-size: 32px;
+						font-weight: bold;
+						color: #404040;
+						padding-bottom: 24px;
+						padding-bottom: 20px;
+						lines:1;
+						text-overflow: ellipsis;
+					}
+					.msg-img{
+						margin-bottom: 16px;
+					}
+					.msg-cont{
+						line-height: 40px;
+						margin-top: 8px;
+						margin-bottom: 8px;
+						font-size: 24px;
+						color: #808080;
+					}
+					.msg-opt{
+						padding-bottom: 16px;
+						padding-top: 16px;
+						font-size: 24px;
+						margin-top: 14px;
+						border-color: #cccccc;
+						border-top-width: 0.5px;
+						color: #404040;
+	
+						.awrr{
+							width: 14px;
+							height: 14px;
+							border-color: #999999;
+							border-top-width: 1px; 
+							border-right-width: 1px; 
+							background-color: #000000;
+						}
+					}
+				}
+			}
+		}
+	</style>
+	<script>
+		import fetch from '@system.fetch'
+		import network from '@system.network'
+		import prompt from '@system.prompt'
+		import webview from '@system.webview'
+		import util from '../common/js/util.js'
+
+		export default{
+			props: [
+				'current'
+			],
+			data: {
+				page: 1,
+				pageSize: 10,
+				isNextLoad: true,
+				noData: false,
+				loading: true,
+				datalist: []
+			},
+			onInit() {
+				let self = this;
+				self.$page.setTitleBar({ text: '章鱼咨询' })
+				network.getType({
+					success(data){
+					  	if(data.type !== 'none'){
+					  		if(self.isNextLoad){
+					  			self.loading = true;
+					  			self.loadData();
+					  		}
+					  	} else {
+					  		prompt.showToast({
+							  message:'无网络'
+							})
+					  	}
+					}
+				})
+
+				console.log(this.current, 2222)
+			},
+			getMsglist() {
+				let self = this;
+				network.getType({
+					success(data){
+					  	if(data.type !== 'none'){
+					  		if(self.isNextLoad){
+					  			self.loading = true;
+					  			self.loadData();
+					  		}
+					  	} else {
+					  		prompt.showToast({
+							  message:'无网络'
+							})
+					  	}
+					}
+				})
+			},
+			loadData() {
+				let self = this;
+				fetch.fetch({ 
+			        url: 'https://jz-c.doumi.com/api/v3/client/message/zhangyu',
+			          data: {
+			            page: self.page,
+			            pageSize: self.pageSize,
+			          },
+			          header: {
+			            accessToken: natives.accessToken
+			          },
+			          success(data) {
+
+			          	let list = JSON.parse(data.data).data
+
+			          	if(	data.code == 200 
+			          	  && !!data && !!data.data 
+						  && !!JSON.parse(data.data).data 
+						  && JSON.parse(data.data).data.length > 0) {
+
+			     			let list = JSON.parse(data.data).data;
+			     			let len = JSON.parse(data.data).data.length;
+
+			     			for(let item of list) {
+			     				item.create_at = util.timeFormat(item.create_at*1000);
+			     			}
+
+				          	if(self.page == 1) {
+				          		self.datalist = list
+				          	} else {
+				          		self.datalist = self.datalist.concat(list)
+				          	}
+							self.noData = false;
+		     				self.isNextLoad = true;
+		     				self.loading = false 
+		     				++self.page
+			          	} else if( JSON.parse(data.data).data.length == 0 ) {
+			          		self.isNextLoad = false;
+			          		self.noData = true
+			           	}
+			          },
+			          fail(data, code) {
+					  		prompt.showToast({
+							  message:`handling fail ${code}`
+							})	          	
+			          }
+			    })
+			},
+			gotoDetail(url) {
+				console.log(url)
+				webview.loadUrl({
+				url: url
+			})
+			}
+		}
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

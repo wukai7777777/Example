@@ -1,0 +1,27 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="container">
+    <text class="title">欢迎使用{{title}}</text>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+</style>
+
+<script>
+  export default {
+    data: {
+      title: '直达服务'
+    }
+  }
+</script>

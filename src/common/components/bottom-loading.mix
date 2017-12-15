@@ -1,0 +1,31 @@
+<template>
+    <div class="load-more">
+        <div show="{{!noData}}">
+            <div show="{{loading}}">
+                <progress type="circular"></progress>
+                <text>加载更多....</text>
+            </div>
+            <text show="{{!loading}}">释放加载更多</text>
+        </div>
+        <text show="{{noData}}">没有更多数据了</text>
+    </div>
+</template>
+<script>
+    export default{
+        props:[
+            'loading',
+            'noData'
+        ],
+    }
+</script>
+
+<style lang="less">
+    .load-more{
+        flex: 1;
+        justify-content: center;
+        height: 100px;
+        text{
+            margin-left: 20px;
+        }
+    }
+</style>
