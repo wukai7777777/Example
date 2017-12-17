@@ -188,8 +188,6 @@
 					  	}
 					}
 				})
-
-				console.log(this.current, 2222)
 			},
 			getMsglist() {
 				let self = this;

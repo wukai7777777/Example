@@ -1,145 +1,77 @@
-<import src="../common/components/bottom-loading.mix" name="bottom-loading"></import>
+
 <import src="../common/components/swiper.mix" name="banner"></import>
 <import src="../common/components/stack.mix" name="layered"></import>
+<import src="../common/components/tbk-list.mix" name="tbk-list"></import>
 <template>
-	<!-- <refresh class="container" onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
 		<layered active="{{current}}">
+		<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
 				<div class="slot-wrap">
-					<div class="swiper-wrap" ondisappear="disappear">
+					<div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
 						<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
 					</div>
-					<div class="tabs-wrap" onappear="appear">
-						<tabs>
+					<div class="tabs-wrap" show="{{channels.length>0}}">
+						<tabs onchange="changeIndex">
 							<tab-bar mode="scrollable" class="tabs-item">
-								<text class="text">item1</text>
-								<text class="text">item2</text>
-								<text class="text">item3</text>
-								<text class="text">item4</text>
-								<text class="text">item5</text>
-								<text class="text">item6</text>
-								<text class="text">item7</text>
-								<text class="text">item8</text>
+								<div class="channels" for="{{(index, item) in channels}}">
+									<text class="text">{{item.text}}</text>
+									<div class="line {{index == curIndex ? 'active' : ''}}"></div>
+								</div>
 							</tab-bar>
 						</tabs>
 					</div>
-					<list onscrollBottom="getDateList" scrollpage="{{true}}" class="datalist" onscroll="scroll">
-						<block for="item in datalist">
-							<list-item type="list-data" class="wrap-list" onclick="goTodetail()">
-								<image class="product-image" src="{{item.pict_url}}"></image>
-								<div class="message-wrap">
-									<div class="msg-left">
-										<text class="title">{{item.title}}</text>
-										<div class="porduct-meta">
-											<text class="fl">¥{{item.zk_final_price}}</text>
-											<text class="fr">¥{{item.price}}</text>
-										</div>
-									</div>
-									<div class="msg-right">
-										<text class="share">分享</text>
-										<text class="price-w">
-											赚
-											<span class="price">{{item.user_get_price}}</span>
-											元
-										</text>
-									</div>
-								</div>
-							</list-item>
-						</block>
+					
+					<tbk-list list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list>
 
-						<list-item type="bottom-loading">
-				            <bottom-loading loading="{{loading}}" no-data="{{noData}}"></bottom-loading>
-				        </list-item>
-					</list>
+					<div class="tabs-wrap" style="position:fixed;" show="{{isShow}}">
+						<tabs onchange="changeIndex">
+							<tab-bar mode="scrollable" class="tabs-item">
+								<div class="channels" for="{{(index, item) in channels}}">
+									<text class="text">{{item.text}}</text>
+									<div class="line {{index == curIndex ? 'active' : ''}}"></div>
+								</div>
+							</tab-bar>
+						</tabs>
+					</div>
 				</div>
 		</layered>
 	<!-- </refresh> -->
 </template>
-
 <style lang="less">
 	.tabs-wrap{
 		background-color: #ffffff;
 		.tabs-item{
 			flex-direction: row;
 			flex: 1;
-			border: 1px solid #cccccc;
-			.text{
-				flex-shrink: 0;
+			border-bottom-width: 1px ;
+			border-color: #cccccc;
+			.channels{
+				flex: 1;
+				flex-direction: column;
 				width: 200px;
 				height: 88px;
-				line-height: 88px;
-				text-align: center;
+				align-items: center;
+				.text{
+					flex-shrink: 0;
+					color: #666666;
+					line-height: 60px;
+				}
+				.line{
+					width: 40px;
+					height: 8px;
+					border-radius: 4px;
+					margin-top: 8px;
+				}
+				.active{
+					background-color: #ff9448;
+				}
 			}
 		}
 	}
 	.slot-wrap{
 		flex-direction: column;
 	}
-	.datalist{
-		flex: 1;
-		padding-left:30px;
-		padding-right:30px;
-		.wrap-list{
-			padding-top: 20px;
-			padding-bottom: 20px;
-			border-bottom-width: 1px;
-			border-color: #cccccc;
-			.product-image{
-				width: 150px;
-				height: 150px;
-				flex-shrink: 0;
-			}
-			.message-wrap{
-				flex: 1;
-				padding-left:  20px;
-				.msg-left{
-					flex-direction: column;
-					align-items: flex-start;
-					flex: 1;
-					.title{
-						font-size: 27px;
-						color: #666666;
-						lines:  2;
-						text-overflow: ellipsis;
-						line-height: 40px;
-					}
-					.porduct-meta{
-						font-size: 24px;
-						margin-top: 14px;
-						.fl{
-							font-size: 26px;
-							color: #ff9448;
-							margin-right: 10px
-						}
-						.fr{
-							text-decoration: line-through;
-						}
-					}
-				}
-				.msg-right{
-					flex-direction: column;
-					width: 150px;
-					margin-left: 10px;
-					.share{
-						padding: 15px;
-						text-align: center;
-						border-width:1px ;
-						border-color: #666666;
-						border-radius: 4px;
-						font-size: 30px;
-					}
-					.price-w{
-						flex-direction: column;
-						font-size: 23px;
-						font-weight: bold;
-						color: #ff9448;
-						padding-top: 10px
-					}
-				}
-			}
-		}
-	}
+	
 </style>
-
 <script>
 	import fetch from '@system.fetch'
 	import network from '@system.network'
@@ -153,27 +85,15 @@
 		],
 		data: {
 			bannerData: [],
-			datalist: [],
-			page: 1,
-			pageSize: 20,
-			channel: 'meizhuanggehu',
-			isNextLoad: true,
+			channels: [],
 			isRefreshing: false,
 			autoPlay: true,
 			interval: 3000,
 			indicator: true,
-			loading: true,
-			noData: false,
-			isShow: false
-		},
-		scroll(e) {
-			console.log(e.scrollY, 88888)
-		},
-		appear() {
-			this.isShow = false;
-		},
-		disappear() {
-			this.isShow = true;
+			isShow: false,
+			appearCount: 0,
+			curIndex: 0,
+			listData: {}
 		},
 		onInit() {
 			let self = this
@@ -182,7 +102,7 @@
 				success:function(data){
 				  	if(data.type !== 'none'){
 				  		self.loadBanner();
-						self.getDateList();
+				  		self.getChannel();
 				  	} else {
 				  		prompt.showToast({
 						  message:'无网络'
@@ -191,28 +111,19 @@
 				}
 			})
 		},
-		getDateList(isRefresh) {
-			let self = this
-			network.getType({
-				success:function(data){
-				  	if(data.type !== 'none'){
-				  		if(self.isNextLoad) { //是否能够加载下一页
-				  			self.loading = true
-				  			self.getTaoBaoKe(isRefresh)
-				  		}
-				  	} else {
-				  		self.loading = false
-				  		prompt.showToast({
-						  message:'无网络'
-						})
-				  	}
-				}
-			})
+		getListData(e) {
+			//清空一下对象再赋值，使得子组件props属性能够监听到数据变化，渲染到模板上
+			this.listData = {};
+			this.listData = e.detail;
+			// console.log(22222)
+			// console.log(e.detail[this.channels[this.curIndex].channel], 999)
+		},
+		scroll(e) {
+			//console.log(e.scrollY, 88888)
 		},
 		// 拉取banner数据
 		loadBanner() {
 			let self = this;
-
 			fetch.fetch({
 				url: "https://jz-c.doumi.com/api/v3/client/message/index",
 				dada: {
@@ -224,7 +135,13 @@
 					accessToken: natives.accessToken
 				},
 				success(data) {
-					self.bannerData = JSON.parse(data.data).data.zhangyu.data;
+					if(data.code == 200 && !!data.data 
+						&& !!JSON.parse(data.data).data 
+						&& !!JSON.parse(data.data).data.zhangyu
+						&& !!JSON.parse(data.data).data.zhangyu.data ){
+						self.bannerData = JSON.parse(data.data).data.zhangyu.data;
+					}
+					
 				},
 				fail(data, code) {
 					prompt.showToast({
@@ -234,52 +151,7 @@
 
 			})
 		},
-		getTaoBaoKe(isRefresh) {
-			let self = this
-			fetch.fetch({ 
-	          url: 'https://jz-c.doumi.com/api/v3/client/tbk/lists',
-	          data: {
-	            page: self.page,
-	            pageSize: self.pageSize,
-	            channel: self.channel,
-	          },
-	          header: {
-	            accessToken: natives.accessToken
-	          },
-	          success(data) {
-	          	self.isRefreshing = false; //收起下拉刷新状态
-	          	if(!!data && !!data.data && !!JSON.parse(data.data).cityInfo 
-				  && !!JSON.parse(data.data).data 
-				  && JSON.parse(data.data).data.length > 0) {
-	     			let list = JSON.parse(data.data).data;
-	     			let len = JSON.parse(data.data).data.length;
-
-		          	if(self.page == 1) {
-		          		self.datalist = list
-		          		if(isRefresh) {
-		          			prompt.showToast({
-		          				message: '已经是最新了'
-		          			})
-		          		}
-		          	} else {
-		          		self.datalist = self.datalist.concat(list)
-		          	}
-					self.noData = false;
-     				self.isNextLoad = true;
-     				self.loading = false 
-     				++self.page
-	          	} else if( JSON.parse(data.data).data.length == 0 ) {
-	          		self.isNextLoad = false;
-	          		self.noData = true
-	          	}
-	          },
-	          fail(data, code) {
-			  		prompt.showToast({
-					  message:`handling fail ${code}`
-					})	          	
-	          }
-	        })
-		},
+		
 		refresh(e) {
 			this.page = 1
 			// 更新刷新状态（属性refreshing的值从false改为true会触发refresh组件的状态更新，反之亦然
@@ -288,11 +160,46 @@
 			this.loadBanner();
 			this.getDateList(true);
 		},
+		hideMask() {
+			// 加载页面时，所有元素的appear事件都会被触发一次。因此，需要过滤第一次的appear事件
+			if(this.appearCount){
+				this.isShow = false;
+			} else {
+				++this.appearCount;
+			}
+		},
+		showMask() {
+			this.isShow = true;
+		},
 		goTodetail() {
 			webview.loadUrl({
 				url: 'https://www.mi.com'
 			})
-		}	
+		},
+		getChannel() {
+			let self = this;
+
+			fetch.fetch({
+				url: "https://jz-c.doumi.com/api/v3/client/tbk/category",
+				header: {
+					accessToken: natives.accessToken
+				},
+				success(data) {
+					if(!!data.code && !!JSON.parse(data.data) && !!JSON.parse(data.data).result) {
+						self.channels = JSON.parse(data.data).result;
+					}
+				},
+				fail(data, code) {
+					prompt.showToast({
+					  message:`handling fail ${code}`
+					})
+				}
+
+			})
+		},
+		changeIndex(e) {
+			this.curIndex = e.index;
+		}
 	}
-	
+
 </script>

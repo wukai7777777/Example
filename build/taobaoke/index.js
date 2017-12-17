@@ -47,12 +47,12 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(3)
-	__webpack_require__(15)
-	__webpack_require__(7)
-	var $app_template$ = __webpack_require__(19)
-	var $app_style$ = __webpack_require__(20)
-	var $app_script$ = __webpack_require__(21)
+	__webpack_require__(21)
+	__webpack_require__(13)
+	__webpack_require__(25)
+	var $app_template$ = __webpack_require__(29)
+	var $app_style$ = __webpack_require__(30)
+	var $app_script$ = __webpack_require__(31)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -69,12 +69,18 @@
 /***/ },
 /* 1 */,
 /* 2 */,
-/* 3 */
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(4)
-	var $app_style$ = __webpack_require__(5)
-	var $app_script$ = __webpack_require__(6)
+	var $app_template$ = __webpack_require__(10)
+	var $app_style$ = __webpack_require__(11)
+	var $app_script$ = __webpack_require__(12)
 	
 	$app_define$('@app-component/bottom-loading', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -87,7 +93,7 @@
 
 
 /***/ },
-/* 4 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -143,7 +149,7 @@
 	}
 
 /***/ },
-/* 5 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -176,7 +182,7 @@
 	}
 
 /***/ },
-/* 6 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -189,12 +195,12 @@
 	};}
 
 /***/ },
-/* 7 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(8)
-	var $app_style$ = __webpack_require__(9)
-	var $app_script$ = __webpack_require__(10)
+	var $app_template$ = __webpack_require__(14)
+	var $app_style$ = __webpack_require__(15)
+	var $app_script$ = __webpack_require__(16)
 	
 	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -207,11 +213,11 @@
 
 
 /***/ },
-/* 8 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "stack",
+	  "type": "div",
 	  "attr": {},
 	  "classList": [
 	    "layered"
@@ -222,47 +228,53 @@
 	      "attr": {}
 	    },
 	    {
-	      "type": "div",
+	      "type": "tabs",
 	      "attr": {},
-	      "classList": [
-	        "footer-wrap"
-	      ],
 	      "children": [
 	        {
-	          "type": "block",
+	          "type": "tab-bar",
 	          "attr": {},
-	          "repeat": {
-	            "exp": function () {return this.footerList},
-	            "key": "index",
-	            "value": "item"
-	          },
+	          "classList": [
+	            "footer-wrap"
+	          ],
 	          "children": [
 	            {
-	              "type": "div",
+	              "type": "block",
 	              "attr": {},
-	              "classList": [
-	                "item"
-	              ],
-	              "events": {
-	                "click": function (evt) {this.routes(this.item,this.index,evt)}
+	              "repeat": {
+	                "exp": function () {return this.footerList},
+	                "key": "index",
+	                "value": "item"
 	              },
 	              "children": [
 	                {
-	                  "type": "image",
-	                  "attr": {
-	                    "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
-	                  },
+	                  "type": "div",
+	                  "attr": {},
 	                  "classList": [
-	                    "icon"
-	                  ]
-	                },
-	                {
-	                  "type": "text",
-	                  "attr": {
-	                    "value": function () {return this.item.pages}
+	                    "item"
+	                  ],
+	                  "events": {
+	                    "click": function (evt) {this.routes(this.item,this.index,evt)}
 	                  },
-	                  "classList": [
-	                    "pages"
+	                  "children": [
+	                    {
+	                      "type": "image",
+	                      "attr": {
+	                        "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
+	                      },
+	                      "classList": [
+	                        "icon"
+	                      ]
+	                    },
+	                    {
+	                      "type": "text",
+	                      "attr": {
+	                        "value": function () {return this.item.pages}
+	                      },
+	                      "classList": [
+	                        "pages"
+	                      ]
+	                    }
 	                  ]
 	                }
 	              ]
@@ -275,7 +287,7 @@
 	}
 
 /***/ },
-/* 9 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -454,7 +466,7 @@
 	}
 
 /***/ },
-/* 10 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -491,27 +503,28 @@
 			}]
 		},
 		routes: function routes(item, index) {
+			console.log(this.active, index);
+			if (this.active == index) {
+				return;
+			}
 			_system2.default.replace({
 				uri: item.route,
 				params: { current: index }
 			});
-		},
-		onInit: function onInit() {
-			console.log(this.active, 66666);
 		}
 	};}
 
 /***/ },
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(16)
-	var $app_style$ = __webpack_require__(17)
-	var $app_script$ = __webpack_require__(18)
+	var $app_template$ = __webpack_require__(22)
+	var $app_style$ = __webpack_require__(23)
+	var $app_script$ = __webpack_require__(24)
 	
 	$app_define$('@app-component/banner', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -524,7 +537,7 @@
 
 
 /***/ },
-/* 16 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -533,11 +546,6 @@
 	    "autoplay": function () {return this.autoPlay},
 	    "interval": function () {return this.interval},
 	    "indicator": function () {return this.indicator}
-	  },
-	  "style": {
-	    "indicatorColor": "rgba(0,0,0,0.2)",
-	    "indicatorSelectedColor": "#FFFF00",
-	    "indicatorSize": "10px"
 	  },
 	  "classList": [
 	    "swiper"
@@ -566,7 +574,7 @@
 	}
 
 /***/ },
-/* 17 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -579,7 +587,10 @@
 	    "width": "100%",
 	    "slideWidth": "100%",
 	    "height": "250px",
-	    "flexShrink": 0,
+	    "resizeMode": "cover",
+	    "indicatorColor": "rgba(0,0,0,0.2)",
+	    "indicatorSelectedColor": "#FFFF00",
+	    "indicatorSize": "10px",
 	    "_meta": {
 	      "ruleDef": [
 	        {
@@ -605,7 +616,7 @@
 	}
 
 /***/ },
-/* 18 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -644,308 +655,189 @@
 	};}
 
 /***/ },
-/* 19 */
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(9)
+	var $app_template$ = __webpack_require__(26)
+	var $app_style$ = __webpack_require__(27)
+	var $app_script$ = __webpack_require__(28)
+	
+	$app_define$('@app-component/tbk-list', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
+
+/***/ },
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "layered",
+	  "type": "list",
 	  "attr": {
-	    "active": function () {return this.current}
+	    "scrollpage": function () {return true}
 	  },
+	  "events": {
+	    "scrollbottom": "getDateList",
+	    "scroll": "scroll"
+	  },
+	  "classList": [
+	    "datalist"
+	  ],
 	  "children": [
 	    {
-	      "type": "div",
+	      "type": "block",
 	      "attr": {},
-	      "classList": [
-	        "slot-wrap"
-	      ],
+	      "repeat": {
+	        "exp": function () {return this.listDatas[this.channels]},
+	        "value": "item"
+	      },
 	      "children": [
 	        {
-	          "type": "div",
-	          "attr": {},
-	          "classList": [
-	            "swiper-wrap"
-	          ],
-	          "events": {
-	            "disappear": "disappear"
-	          },
-	          "children": [
-	            {
-	              "type": "banner",
-	              "attr": {
-	                "banners": function () {return this.bannerData},
-	                "interval": function () {return this.interval},
-	                "autoPlay": function () {return this.autoPlay},
-	                "indicator": function () {return this.indicator}
-	              }
-	            }
-	          ]
-	        },
-	        {
-	          "type": "div",
-	          "attr": {},
-	          "classList": [
-	            "tabs-wrap"
-	          ],
-	          "events": {
-	            "appear": "appear"
-	          },
-	          "children": [
-	            {
-	              "type": "tabs",
-	              "attr": {},
-	              "children": [
-	                {
-	                  "type": "tab-bar",
-	                  "attr": {
-	                    "mode": "scrollable"
-	                  },
-	                  "classList": [
-	                    "tabs-item"
-	                  ],
-	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item1"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item2"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item3"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item4"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item5"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item6"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item7"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": "item8"
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    }
-	                  ]
-	                }
-	              ]
-	            }
-	          ]
-	        },
-	        {
-	          "type": "list",
+	          "type": "list-item",
 	          "attr": {
-	            "scrollpage": function () {return true}
-	          },
-	          "events": {
-	            "scrollbottom": "getDateList",
-	            "scroll": "scroll"
+	            "type": "list-data",
+	            "show": "(channels in listDatas) ? true : false"
 	          },
 	          "classList": [
-	            "datalist"
+	            "wrap-list"
 	          ],
+	          "events": {
+	            "click": function (evt) {this.goTodetail(evt)}
+	          },
 	          "children": [
 	            {
-	              "type": "block",
-	              "attr": {},
-	              "repeat": {
-	                "exp": function () {return this.datalist},
-	                "value": "item"
+	              "type": "image",
+	              "attr": {
+	                "src": function () {return this.item.pict_url}
 	              },
+	              "classList": [
+	                "product-image"
+	              ]
+	            },
+	            {
+	              "type": "div",
+	              "attr": {},
+	              "classList": [
+	                "message-wrap"
+	              ],
 	              "children": [
 	                {
-	                  "type": "list-item",
-	                  "attr": {
-	                    "type": "list-data"
-	                  },
+	                  "type": "div",
+	                  "attr": {},
 	                  "classList": [
-	                    "wrap-list"
+	                    "msg-left"
 	                  ],
-	                  "events": {
-	                    "click": function (evt) {this.goTodetail(evt)}
-	                  },
 	                  "children": [
 	                    {
-	                      "type": "image",
+	                      "type": "text",
 	                      "attr": {
-	                        "src": function () {return this.item.pict_url}
+	                        "value": function () {return this.item.title}
 	                      },
 	                      "classList": [
-	                        "product-image"
+	                        "title"
 	                      ]
 	                    },
 	                    {
 	                      "type": "div",
 	                      "attr": {},
 	                      "classList": [
-	                        "message-wrap"
+	                        "porduct-meta"
 	                      ],
 	                      "children": [
 	                        {
-	                          "type": "div",
-	                          "attr": {},
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return '¥' + (this.item.zk_final_price)}
+	                          },
 	                          "classList": [
-	                            "msg-left"
-	                          ],
-	                          "children": [
-	                            {
-	                              "type": "text",
-	                              "attr": {
-	                                "value": function () {return this.item.title}
-	                              },
-	                              "classList": [
-	                                "title"
-	                              ]
-	                            },
-	                            {
-	                              "type": "div",
-	                              "attr": {},
-	                              "classList": [
-	                                "porduct-meta"
-	                              ],
-	                              "children": [
-	                                {
-	                                  "type": "text",
-	                                  "attr": {
-	                                    "value": function () {return '¥' + (this.item.zk_final_price)}
-	                                  },
-	                                  "classList": [
-	                                    "fl"
-	                                  ]
-	                                },
-	                                {
-	                                  "type": "text",
-	                                  "attr": {
-	                                    "value": function () {return '¥' + (this.item.price)}
-	                                  },
-	                                  "classList": [
-	                                    "fr"
-	                                  ]
-	                                }
-	                              ]
-	                            }
+	                            "fl"
 	                          ]
 	                        },
 	                        {
-	                          "type": "div",
-	                          "attr": {},
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return '¥' + (this.item.price)}
+	                          },
 	                          "classList": [
-	                            "msg-right"
-	                          ],
-	                          "children": [
-	                            {
-	                              "type": "text",
-	                              "attr": {
-	                                "value": "分享"
-	                              },
-	                              "classList": [
-	                                "share"
-	                              ]
-	                            },
-	                            {
-	                              "type": "text",
-	                              "attr": {},
-	                              "classList": [
-	                                "price-w"
-	                              ],
-	                              "children": [
-	                                {
-	                                  "type": "span",
-	                                  "attr": {
-	                                    "value": " 赚 "
-	                                  }
-	                                },
-	                                {
-	                                  "type": "span",
-	                                  "attr": {
-	                                    "value": function () {return this.item.user_get_price}
-	                                  },
-	                                  "classList": [
-	                                    "price"
-	                                  ]
-	                                },
-	                                {
-	                                  "type": "span",
-	                                  "attr": {
-	                                    "value": " 元 "
-	                                  }
-	                                }
-	                              ]
-	                            }
+	                            "fr"
 	                          ]
+	                        }
+	                      ]
+	                    }
+	                  ]
+	                },
+	                {
+	                  "type": "div",
+	                  "attr": {},
+	                  "classList": [
+	                    "msg-right"
+	                  ],
+	                  "children": [
+	                    {
+	                      "type": "text",
+	                      "attr": {
+	                        "value": "分享"
+	                      },
+	                      "classList": [
+	                        "share"
+	                      ]
+	                    },
+	                    {
+	                      "type": "text",
+	                      "attr": {},
+	                      "classList": [
+	                        "price-w"
+	                      ],
+	                      "children": [
+	                        {
+	                          "type": "span",
+	                          "attr": {
+	                            "value": " 赚 "
+	                          }
+	                        },
+	                        {
+	                          "type": "span",
+	                          "attr": {
+	                            "value": function () {return this.item.user_get_price}
+	                          },
+	                          "classList": [
+	                            "price"
+	                          ]
+	                        },
+	                        {
+	                          "type": "span",
+	                          "attr": {
+	                            "value": " 元 "
+	                          }
 	                        }
 	                      ]
 	                    }
 	                  ]
 	                }
 	              ]
-	            },
-	            {
-	              "type": "list-item",
-	              "attr": {
-	                "type": "bottom-loading"
-	              },
-	              "children": [
-	                {
-	                  "type": "bottom-loading",
-	                  "attr": {
-	                    "loading": function () {return this.loading},
-	                    "noData": function () {return this.noData}
-	                  }
-	                }
-	              ]
 	            }
 	          ]
+	        }
+	      ]
+	    },
+	    {
+	      "type": "list-item",
+	      "attr": {
+	        "type": "bottom-loading"
+	      },
+	      "children": [
+	        {
+	          "type": "bottom-loading",
+	          "attr": {
+	            "loading": function () {return this.loadingStr},
+	            "noData": function () {return this.noDataStr}
+	          }
 	        }
 	      ]
 	    }
@@ -953,92 +845,15 @@
 	}
 
 /***/ },
-/* 20 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  ".tabs-wrap": {
-	    "backgroundColor": "#ffffff"
-	  },
-	  ".tabs-wrap .tabs-item": {
-	    "flexDirection": "row",
-	    "flex": 1,
-	    "borderTopWidth": "1px",
-	    "borderRightWidth": "1px",
-	    "borderBottomWidth": "1px",
-	    "borderLeftWidth": "1px",
-	    "borderStyle": "solid",
-	    "borderTopColor": "#cccccc",
-	    "borderRightColor": "#cccccc",
-	    "borderBottomColor": "#cccccc",
-	    "borderLeftColor": "#cccccc",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "tabs-wrap"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "tabs-item"
-	        }
-	      ]
-	    }
-	  },
-	  ".tabs-wrap .tabs-item .text": {
-	    "flexShrink": 0,
-	    "width": "200px",
-	    "height": "88px",
-	    "lineHeight": "88px",
-	    "textAlign": "center",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "tabs-wrap"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "tabs-item"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "text"
-	        }
-	      ]
-	    }
-	  },
-	  ".slot-wrap": {
-	    "flexDirection": "column"
-	  },
 	  ".datalist": {
 	    "flex": 1,
 	    "paddingLeft": "30px",
-	    "paddingRight": "30px"
+	    "paddingRight": "30px",
+	    "paddingBottom": "100px"
 	  },
 	  ".datalist .wrap-list": {
 	    "paddingTop": "20px",
@@ -1605,7 +1420,585 @@
 	}
 
 /***/ },
-/* 21 */
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = function(module, exports, $app_require$){'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _system = $app_require$('@app-module/system.fetch');
+	
+	var _system2 = _interopRequireDefault(_system);
+	
+	var _system3 = $app_require$('@app-module/system.network');
+	
+	var _system4 = _interopRequireDefault(_system3);
+	
+	var _system5 = $app_require$('@app-module/system.prompt');
+	
+	var _system6 = _interopRequireDefault(_system5);
+	
+	var _system7 = $app_require$('@app-module/system.webview');
+	
+	var _system8 = _interopRequireDefault(_system7);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+		props: {
+			listDatas: {
+				type: Object,
+				default: {}
+			},
+			channelArr: {
+				type: Array,
+				default: []
+			},
+			curIndex: {
+				type: Number,
+				default: 0
+			}
+		},
+		data: function data() {
+			return {
+				listData: {},
+				datalist: [],
+				loading: [],
+				loadingStr: true,
+				noData: [],
+				noDataStr: false,
+				isNextLoad: [],
+				page: [],
+				pageSize: 20,
+				channels: ''
+			};
+		},
+		onInit: function onInit() {
+			var self = this;
+	
+			this.$watch('channelArr', 'callBackChannel');
+			this.$watch('curIndex', 'selectChannel');
+	
+			this.page[this.curIndex] = 1;
+			this.loading[this.curIndex] = true;
+			this.loadingStr = this.loading[this.curIndex];
+			this.noData[this.curIndex] = false;
+			this.noDataStr = this.noData[this.curIndex];
+			this.isNextLoad[this.curIndex] = true;
+		},
+		callBackChannel: function callBackChannel() {
+			this.channels = this.channelArr[this.curIndex].channel;
+			this.listData[this.channels] = [];
+			this.getDateList();
+		},
+		selectChannel: function selectChannel() {
+			this.channels = this.channelArr[this.curIndex].channel;
+	
+			if (this.channels in this.listData) {
+				this.noDataStr = this.noData[this.curIndex];
+				this.loadingStr = this.loading[this.curIndex];
+				return;
+			} else {
+				this.page[this.curIndex] = 1;
+				this.listData[this.channels] = [];
+				this.loading[this.curIndex] = true;
+				this.loadingStr = this.loading[this.curIndex];
+				this.noData[this.curIndex] = false;
+				this.noDataStr = this.noData[this.curIndex];
+				this.isNextLoad[this.curIndex] = true;
+				this.getDateList();
+			}
+		},
+		getDateList: function getDateList(isRefresh) {
+			var self = this;
+			_system4.default.getType({
+				success: function success(data) {
+					if (data.type !== 'none') {
+						if (self.isNextLoad[self.curIndex]) {
+							self.loading[self.curIndex] = true;
+							self.loadingStr = self.loading[self.curIndex];
+							self.getTaoBaoKe(isRefresh);
+						}
+					} else {
+						self.loading[self.curIndex] = false;
+						self.loadingStr = self.loading[self.curIndex];
+						_system6.default.showToast({
+							message: '无网络'
+						});
+					}
+				}
+			});
+		},
+		getTaoBaoKe: function getTaoBaoKe(isRefresh) {
+			var self = this;
+			self.channels = self.channelArr[self.curIndex].channel;
+			console.log(self.page[self.curIndex], 1);
+	
+			console.log(self.channels, 3);
+			_system2.default.fetch({
+				url: 'https://jz-c.doumi.com/api/v3/client/tbk/lists',
+				data: {
+					page: self.page[self.curIndex],
+					pageSize: self.pageSize,
+					channel: self.channels
+				},
+				header: {
+					accessToken: natives.accessToken
+				},
+				success: function success(data) {
+					console.log(1);
+	
+					if (!!data && !!data.data && !!JSON.parse(data.data).cityInfo && !!JSON.parse(data.data).data && JSON.parse(data.data).data.length > 0) {
+						var list = JSON.parse(data.data).data;
+						var len = JSON.parse(data.data).data.length;
+						if (self.page[self.curIndex] == 1) {
+							self.listData[self.channels] = list;
+	
+							if (isRefresh) {
+								_system6.default.showToast({
+									message: '已经是最新了'
+								});
+							}
+						} else {
+							self.listData[self.channels] = self.listData[self.channels].concat(list);
+						}
+	
+						self.$emit('channeldata', self.listData);
+						console.log(list.length, 'length');
+						self.noData[self.curIndex] = false;
+	
+						self.noDataStr = self.noData[self.curIndex];
+						self.isNextLoad[self.curIndex] = true;
+	
+						self.loading[self.curIndex] = false;
+						self.loadingStr = self.loading[self.curIndex];
+	
+						++self.page[self.curIndex];
+						console.log(2);
+					} else if (JSON.parse(data.data).data.length == 0) {
+						console.log(3);
+						self.isNextLoad[self.curIndex] = false;
+	
+						self.noData[self.curIndex] = true;
+	
+						self.noDataStr = self.noData[self.curIndex];
+					}
+				},
+				fail: function fail(data, code) {
+					_system6.default.showToast({
+						message: 'handling fail ' + code
+					});
+				}
+			});
+		},
+		goTodetail: function goTodetail() {
+			_system8.default.loadUrl({
+				url: 'https://www.mi.com'
+			});
+		}
+	};}
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "type": "layered",
+	  "attr": {
+	    "active": function () {return this.current}
+	  },
+	  "children": [
+	    {
+	      "type": "div",
+	      "attr": {},
+	      "classList": [
+	        "slot-wrap"
+	      ],
+	      "children": [
+	        {
+	          "type": "div",
+	          "attr": {
+	            "show": "bannerData.length>0"
+	          },
+	          "classList": [
+	            "swiper-wrap"
+	          ],
+	          "events": {
+	            "disappear": "showMask",
+	            "appear": "hideMask"
+	          },
+	          "children": [
+	            {
+	              "type": "banner",
+	              "attr": {
+	                "banners": function () {return this.bannerData},
+	                "interval": function () {return this.interval},
+	                "autoPlay": function () {return this.autoPlay},
+	                "indicator": function () {return this.indicator}
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "attr": {
+	            "show": function () {return this.channels.length>0}
+	          },
+	          "classList": [
+	            "tabs-wrap"
+	          ],
+	          "children": [
+	            {
+	              "type": "tabs",
+	              "attr": {},
+	              "events": {
+	                "change": "changeIndex"
+	              },
+	              "children": [
+	                {
+	                  "type": "tab-bar",
+	                  "attr": {
+	                    "mode": "scrollable"
+	                  },
+	                  "classList": [
+	                    "tabs-item"
+	                  ],
+	                  "children": [
+	                    {
+	                      "type": "div",
+	                      "attr": {},
+	                      "classList": [
+	                        "channels"
+	                      ],
+	                      "repeat": {
+	                        "exp": function () {return this.channels},
+	                        "key": "index",
+	                        "value": "item"
+	                      },
+	                      "children": [
+	                        {
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return this.item.text}
+	                          },
+	                          "classList": [
+	                            "text"
+	                          ]
+	                        },
+	                        {
+	                          "type": "div",
+	                          "attr": {},
+	                          "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
+	                        }
+	                      ]
+	                    }
+	                  ]
+	                }
+	              ]
+	            }
+	          ]
+	        },
+	        {
+	          "type": "tbk-list",
+	          "attr": {
+	            "listDatas": function () {return this.listData},
+	            "curIndex": function () {return this.curIndex},
+	            "channelArr": function () {return this.channels}
+	          },
+	          "events": {
+	            "channeldata": "getListData"
+	          }
+	        },
+	        {
+	          "type": "div",
+	          "attr": {
+	            "show": function () {return this.isShow}
+	          },
+	          "classList": [
+	            "tabs-wrap"
+	          ],
+	          "style": {
+	            "position": "fixed"
+	          },
+	          "children": [
+	            {
+	              "type": "tabs",
+	              "attr": {},
+	              "events": {
+	                "change": "changeIndex"
+	              },
+	              "children": [
+	                {
+	                  "type": "tab-bar",
+	                  "attr": {
+	                    "mode": "scrollable"
+	                  },
+	                  "classList": [
+	                    "tabs-item"
+	                  ],
+	                  "children": [
+	                    {
+	                      "type": "div",
+	                      "attr": {},
+	                      "classList": [
+	                        "channels"
+	                      ],
+	                      "repeat": {
+	                        "exp": function () {return this.channels},
+	                        "key": "index",
+	                        "value": "item"
+	                      },
+	                      "children": [
+	                        {
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return this.item.text}
+	                          },
+	                          "classList": [
+	                            "text"
+	                          ]
+	                        },
+	                        {
+	                          "type": "div",
+	                          "attr": {},
+	                          "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
+	                        }
+	                      ]
+	                    }
+	                  ]
+	                }
+	              ]
+	            }
+	          ]
+	        }
+	      ]
+	    }
+	  ]
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  ".tabs-wrap": {
+	    "backgroundColor": "#ffffff"
+	  },
+	  ".tabs-wrap .tabs-item": {
+	    "flexDirection": "row",
+	    "flex": 1,
+	    "borderBottomWidth": "1px",
+	    "borderTopColor": "#cccccc",
+	    "borderRightColor": "#cccccc",
+	    "borderBottomColor": "#cccccc",
+	    "borderLeftColor": "#cccccc",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-item"
+	        }
+	      ]
+	    }
+	  },
+	  ".tabs-wrap .tabs-item .channels": {
+	    "flex": 1,
+	    "flexDirection": "column",
+	    "width": "200px",
+	    "height": "88px",
+	    "alignItems": "center",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-item"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "channels"
+	        }
+	      ]
+	    }
+	  },
+	  ".tabs-wrap .tabs-item .channels .text": {
+	    "flexShrink": 0,
+	    "color": "#666666",
+	    "lineHeight": "60px",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-item"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "channels"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "text"
+	        }
+	      ]
+	    }
+	  },
+	  ".tabs-wrap .tabs-item .channels .line": {
+	    "width": "40px",
+	    "height": "8px",
+	    "borderRadius": "4px",
+	    "marginTop": "8px",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-item"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "channels"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "line"
+	        }
+	      ]
+	    }
+	  },
+	  ".tabs-wrap .tabs-item .channels .active": {
+	    "backgroundColor": "#ff9448",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "tabs-item"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "channels"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "active"
+	        }
+	      ]
+	    }
+	  },
+	  ".slot-wrap": {
+	    "flexDirection": "column"
+	  }
+	}
+
+/***/ },
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1640,27 +2033,15 @@
 		props: ['current'],
 		data: {
 			bannerData: [],
-			datalist: [],
-			page: 1,
-			pageSize: 20,
-			channel: 'meizhuanggehu',
-			isNextLoad: true,
+			channels: [],
 			isRefreshing: false,
 			autoPlay: true,
 			interval: 3000,
 			indicator: true,
-			loading: true,
-			noData: false,
-			isShow: false
-		},
-		scroll: function scroll(e) {
-			console.log(e.scrollY, 88888);
-		},
-		appear: function appear() {
-			this.isShow = false;
-		},
-		disappear: function disappear() {
-			this.isShow = true;
+			isShow: false,
+			appearCount: 0,
+			curIndex: 0,
+			listData: {}
 		},
 		onInit: function onInit() {
 			var self = this;
@@ -1669,7 +2050,7 @@
 				success: function success(data) {
 					if (data.type !== 'none') {
 						self.loadBanner();
-						self.getDateList();
+						self.getChannel();
 					} else {
 						_system6.default.showToast({
 							message: '无网络'
@@ -1678,27 +2059,13 @@
 				}
 			});
 		},
-		getDateList: function getDateList(isRefresh) {
-			var self = this;
-			_system4.default.getType({
-				success: function success(data) {
-					if (data.type !== 'none') {
-						if (self.isNextLoad) {
-							self.loading = true;
-							self.getTaoBaoKe(isRefresh);
-						}
-					} else {
-						self.loading = false;
-						_system6.default.showToast({
-							message: '无网络'
-						});
-					}
-				}
-			});
+		getListData: function getListData(e) {
+			this.listData = {};
+			this.listData = e.detail;
 		},
+		scroll: function scroll(e) {},
 		loadBanner: function loadBanner() {
 			var self = this;
-	
 			_system2.default.fetch({
 				url: "https://jz-c.doumi.com/api/v3/client/message/index",
 				dada: {
@@ -1710,50 +2077,8 @@
 					accessToken: natives.accessToken
 				},
 				success: function success(data) {
-					self.bannerData = JSON.parse(data.data).data.zhangyu.data;
-				},
-				fail: function fail(data, code) {
-					_system6.default.showToast({
-						message: 'handling fail ' + code
-					});
-				}
-			});
-		},
-		getTaoBaoKe: function getTaoBaoKe(isRefresh) {
-			var self = this;
-			_system2.default.fetch({
-				url: 'https://jz-c.doumi.com/api/v3/client/tbk/lists',
-				data: {
-					page: self.page,
-					pageSize: self.pageSize,
-					channel: self.channel
-				},
-				header: {
-					accessToken: natives.accessToken
-				},
-				success: function success(data) {
-					self.isRefreshing = false;
-					if (!!data && !!data.data && !!JSON.parse(data.data).cityInfo && !!JSON.parse(data.data).data && JSON.parse(data.data).data.length > 0) {
-						var list = JSON.parse(data.data).data;
-						var len = JSON.parse(data.data).data.length;
-	
-						if (self.page == 1) {
-							self.datalist = list;
-							if (isRefresh) {
-								_system6.default.showToast({
-									message: '已经是最新了'
-								});
-							}
-						} else {
-							self.datalist = self.datalist.concat(list);
-						}
-						self.noData = false;
-						self.isNextLoad = true;
-						self.loading = false;
-						++self.page;
-					} else if (JSON.parse(data.data).data.length == 0) {
-						self.isNextLoad = false;
-						self.noData = true;
+					if (data.code == 200 && !!data.data && !!JSON.parse(data.data).data && !!JSON.parse(data.data).data.zhangyu && !!JSON.parse(data.data).data.zhangyu.data) {
+						self.bannerData = JSON.parse(data.data).data.zhangyu.data;
 					}
 				},
 				fail: function fail(data, code) {
@@ -1771,10 +2096,43 @@
 			this.loadBanner();
 			this.getDateList(true);
 		},
+		hideMask: function hideMask() {
+			if (this.appearCount) {
+				this.isShow = false;
+			} else {
+				++this.appearCount;
+			}
+		},
+		showMask: function showMask() {
+			this.isShow = true;
+		},
 		goTodetail: function goTodetail() {
 			_system8.default.loadUrl({
 				url: 'https://www.mi.com'
 			});
+		},
+		getChannel: function getChannel() {
+			var self = this;
+	
+			_system2.default.fetch({
+				url: "https://jz-c.doumi.com/api/v3/client/tbk/category",
+				header: {
+					accessToken: natives.accessToken
+				},
+				success: function success(data) {
+					if (!!data.code && !!JSON.parse(data.data) && !!JSON.parse(data.data).result) {
+						self.channels = JSON.parse(data.data).result;
+					}
+				},
+				fail: function fail(data, code) {
+					_system6.default.showToast({
+						message: 'handling fail ' + code
+					});
+				}
+			});
+		},
+		changeIndex: function changeIndex(e) {
+			this.curIndex = e.index;
 		}
 	};}
 

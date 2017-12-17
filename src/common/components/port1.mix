@@ -1,0 +1,15 @@
+<template>
+	<div class="box">
+		<text onclick="pess">你好吗12313</text>
+	</div>
+</template>
+<script>
+	export default{
+		onInit() {
+		},
+		pess(){
+			console.log(1212)
+			this.$emit('wukai', {name: 'wukai'})
+		}
+	}
+</script>

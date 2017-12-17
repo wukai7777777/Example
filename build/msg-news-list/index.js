@@ -47,11 +47,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(3)
-	__webpack_require__(7)
-	var $app_template$ = __webpack_require__(11)
-	var $app_style$ = __webpack_require__(12)
-	var $app_script$ = __webpack_require__(13)
+	__webpack_require__(9)
+	__webpack_require__(13)
+	var $app_template$ = __webpack_require__(17)
+	var $app_style$ = __webpack_require__(18)
+	var $app_script$ = __webpack_require__(19)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -68,12 +68,18 @@
 /***/ },
 /* 1 */,
 /* 2 */,
-/* 3 */
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(4)
-	var $app_style$ = __webpack_require__(5)
-	var $app_script$ = __webpack_require__(6)
+	var $app_template$ = __webpack_require__(10)
+	var $app_style$ = __webpack_require__(11)
+	var $app_script$ = __webpack_require__(12)
 	
 	$app_define$('@app-component/bottom-loading', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -86,7 +92,7 @@
 
 
 /***/ },
-/* 4 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -142,7 +148,7 @@
 	}
 
 /***/ },
-/* 5 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -175,7 +181,7 @@
 	}
 
 /***/ },
-/* 6 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -188,12 +194,12 @@
 	};}
 
 /***/ },
-/* 7 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(8)
-	var $app_style$ = __webpack_require__(9)
-	var $app_script$ = __webpack_require__(10)
+	var $app_template$ = __webpack_require__(14)
+	var $app_style$ = __webpack_require__(15)
+	var $app_script$ = __webpack_require__(16)
 	
 	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -206,11 +212,11 @@
 
 
 /***/ },
-/* 8 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "stack",
+	  "type": "div",
 	  "attr": {},
 	  "classList": [
 	    "layered"
@@ -221,47 +227,53 @@
 	      "attr": {}
 	    },
 	    {
-	      "type": "div",
+	      "type": "tabs",
 	      "attr": {},
-	      "classList": [
-	        "footer-wrap"
-	      ],
 	      "children": [
 	        {
-	          "type": "block",
+	          "type": "tab-bar",
 	          "attr": {},
-	          "repeat": {
-	            "exp": function () {return this.footerList},
-	            "key": "index",
-	            "value": "item"
-	          },
+	          "classList": [
+	            "footer-wrap"
+	          ],
 	          "children": [
 	            {
-	              "type": "div",
+	              "type": "block",
 	              "attr": {},
-	              "classList": [
-	                "item"
-	              ],
-	              "events": {
-	                "click": function (evt) {this.routes(this.item,this.index,evt)}
+	              "repeat": {
+	                "exp": function () {return this.footerList},
+	                "key": "index",
+	                "value": "item"
 	              },
 	              "children": [
 	                {
-	                  "type": "image",
-	                  "attr": {
-	                    "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
-	                  },
+	                  "type": "div",
+	                  "attr": {},
 	                  "classList": [
-	                    "icon"
-	                  ]
-	                },
-	                {
-	                  "type": "text",
-	                  "attr": {
-	                    "value": function () {return this.item.pages}
+	                    "item"
+	                  ],
+	                  "events": {
+	                    "click": function (evt) {this.routes(this.item,this.index,evt)}
 	                  },
-	                  "classList": [
-	                    "pages"
+	                  "children": [
+	                    {
+	                      "type": "image",
+	                      "attr": {
+	                        "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
+	                      },
+	                      "classList": [
+	                        "icon"
+	                      ]
+	                    },
+	                    {
+	                      "type": "text",
+	                      "attr": {
+	                        "value": function () {return this.item.pages}
+	                      },
+	                      "classList": [
+	                        "pages"
+	                      ]
+	                    }
 	                  ]
 	                }
 	              ]
@@ -274,7 +286,7 @@
 	}
 
 /***/ },
-/* 9 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -453,7 +465,7 @@
 	}
 
 /***/ },
-/* 10 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -490,18 +502,19 @@
 			}]
 		},
 		routes: function routes(item, index) {
+			console.log(this.active, index);
+			if (this.active == index) {
+				return;
+			}
 			_system2.default.replace({
 				uri: item.route,
 				params: { current: index }
 			});
-		},
-		onInit: function onInit() {
-			console.log(this.active, 66666);
 		}
 	};}
 
 /***/ },
-/* 11 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -741,7 +754,7 @@
 	}
 
 /***/ },
-/* 12 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1551,7 +1564,7 @@
 	}
 
 /***/ },
-/* 13 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1576,7 +1589,7 @@
 	
 	var _system8 = _interopRequireDefault(_system7);
 	
-	var _util = __webpack_require__(14);
+	var _util = __webpack_require__(20);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -1609,8 +1622,6 @@
 					}
 				}
 			});
-	
-			console.log(this.current, 2222);
 		},
 		getMsglist: function getMsglist() {
 			var self = this;
@@ -1704,7 +1715,7 @@
 	};}
 
 /***/ },
-/* 14 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';

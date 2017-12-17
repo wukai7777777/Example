@@ -1,0 +1,277 @@
+<import src="./bottom-loading.mix" name="bottom-loading"></import>
+<template>
+	<list onscrollBottom="getDateList" scrollpage="{{true}}" class="datalist" onscroll="scroll">
+		<!-- <list-item type="ceshi">
+			<text class="">
+				{{noDataStr}}
+			</text>
+		</list-item> -->
+		<block for="{{item in listDatas[channels]}}">
+			<list-item type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
+				<image class="product-image" src="{{item.pict_url}}"></image>
+				<div class="message-wrap">
+					<div class="msg-left">
+						<text class="title">{{item.title}}</text>
+						<div class="porduct-meta">
+							<text class="fl">¥{{item.zk_final_price}}</text>
+							<text class="fr">¥{{item.price}}</text>
+						</div>
+					</div>
+					<div class="msg-right">
+						<text class="share">分享</text>
+						<text class="price-w">
+							赚
+							<span class="price">{{item.user_get_price}}</span>
+							元
+						</text>
+					</div>
+				</div>
+			</list-item>
+		</block>
+
+
+		<list-item type="bottom-loading">
+            <bottom-loading :loading="{{loadingStr}}" :no-data="{{noDataStr}}"></bottom-loading>
+        </list-item>
+	</list>
+</template>
+<script>
+	import fetch from '@system.fetch'
+	import network from '@system.network'
+	import prompt from '@system.prompt'
+	import webview from '@system.webview'
+	export default{
+		//props:['listDatas', 'channelArr', 'curIndex'],
+		props: {
+			listDatas: {
+				type: Object,
+				default: {}
+			},
+			channelArr: {
+				type: Array,
+				default: []
+			},
+			curIndex: {
+				type: Number,
+				default: 0
+			}
+		},
+		data(){
+			return {
+				listData: {},
+				datalist: [],
+				loading: [],
+				loadingStr: true,
+				noData: [],
+				noDataStr: false,
+				isNextLoad: [],
+				page: [],
+				pageSize: 20,
+				channels: '',
+			}
+		},
+		onInit() {
+			let self = this
+			//当第一次点击对应channel时初始化page=1
+			this.$watch('channelArr', 'callBackChannel');
+			this.$watch('curIndex', 'selectChannel');
+
+			//给对应channel初始化各种状态
+			this.page[this.curIndex] = 1;
+			this.loading[this.curIndex] = true;
+			this.loadingStr = this.loading[this.curIndex];
+			this.noData[this.curIndex] = false;
+			this.noDataStr = this.noData[this.curIndex];
+			this.isNextLoad[this.curIndex] = true;
+
+			// setTimeout(() => {
+			// 	self.$emit('channeldata', {name: 'wukai'})
+			// }, 1000)
+		},
+		callBackChannel() {
+			//父组件channel数据回调才执行 给对应channel初始化各种状态
+			this.channels = this.channelArr[this.curIndex].channel
+			this.listData[this.channels] = [];
+			this.getDateList();
+		},
+		selectChannel() {
+			//每次点击tab时动态获取channels
+			this.channels = this.channelArr[this.curIndex].channel
+			//console.log(this.channels)
+			//已经点击过channels
+			if(this.channels in this.listData){
+				//第二次切换获取底部状态
+				this.noDataStr = this.noData[this.curIndex];
+				this.loadingStr = this.loading[this.curIndex];
+				return;
+			}else{ //第一次点击channel
+				//当第一次点击对应channel初始化各种状态
+				this.page[this.curIndex] = 1;
+				this.listData[this.channels] = [];
+				this.loading[this.curIndex] = true;
+				this.loadingStr = this.loading[this.curIndex];
+				this.noData[this.curIndex] = false;
+				this.noDataStr = this.noData[this.curIndex];
+				this.isNextLoad[this.curIndex] = true;
+				this.getDateList();
+			}
+		},
+		getDateList(isRefresh) {
+			let self = this;
+			network.getType({
+				success:function(data){
+				  	if(data.type !== 'none'){
+				  		if(self.isNextLoad[self.curIndex]) { //是否能够加载下一页
+				  			self.loading[self.curIndex] = true;
+				  			self.loadingStr = self.loading[self.curIndex];
+				  			self.getTaoBaoKe(isRefresh)
+				  		}
+				  	} else {
+				  		self.loading[self.curIndex] = false
+				  		self.loadingStr = self.loading[self.curIndex];
+				  		prompt.showToast({
+						  message:'无网络'
+						})
+				  	}
+				}
+			})
+		},
+		getTaoBaoKe(isRefresh) {
+			let self = this;
+			self.channels = self.channelArr[self.curIndex].channel;
+			console.log(self.page[self.curIndex], 1)
+			//console.log(self.pageSize, 2)
+			console.log(self.channels, 3)
+			fetch.fetch({ 
+	          url: 'https://jz-c.doumi.com/api/v3/client/tbk/lists',
+	          data: {
+	            page: self.page[self.curIndex],
+	            pageSize: self.pageSize,
+	            channel: self.channels
+	          },
+	          header: {
+	            accessToken: natives.accessToken
+	          },
+	          success(data) {
+	          	console.log(1)
+	          	//console.log(JSON.stringify(data))
+	          	//self.isRefreshing = false; //收起下拉刷新状态
+	          	if(!!data && !!data.data && !!JSON.parse(data.data).cityInfo 
+				  && !!JSON.parse(data.data).data 
+				  && JSON.parse(data.data).data.length > 0) {
+	     			let list = JSON.parse(data.data).data;
+	     			let len = JSON.parse(data.data).data.length;
+		          	if(self.page[self.curIndex] == 1) {
+		          		self.listData[self.channels] = list;
+		          		// console.log(JSON.stringify(self.listData[self.channels]))
+		          		if(isRefresh) {
+		          			prompt.showToast({
+		          				message: '已经是最新了'
+		          			})
+		          		}
+		          	} else {
+		          		self.listData[self.channels] = self.listData[self.channels].concat(list)
+		          	}
+		          	//回传到父组件
+		          	self.$emit('channeldata', self.listData)
+		          	console.log(list.length, 'length')
+					self.noData[self.curIndex] = false;
+					//二次转存为了banding数据
+					self.noDataStr = self.noData[self.curIndex]
+     				self.isNextLoad[self.curIndex] = true;
+
+     				self.loading[self.curIndex] = false 
+     				self.loadingStr = self.loading[self.curIndex];
+
+     				++self.page[self.curIndex] //加载对应channel的页数
+     				console.log(2)
+	          	} else if( JSON.parse(data.data).data.length == 0 ) {
+	          		console.log(3)
+	          		self.isNextLoad[self.curIndex] = false;
+	          		
+	          		self.noData[self.curIndex] = true;
+	          		//二次转存为了banding数据
+					self.noDataStr = self.noData[self.curIndex]
+	          	}
+	          },
+	          fail(data, code) {
+			  		prompt.showToast({
+					  message:`handling fail ${code}`
+					})	          	
+	          }
+	        })
+		},
+		goTodetail() {
+			webview.loadUrl({
+				url: 'https://www.mi.com'
+			})
+		}
+	}
+</script>
+<style lang="less">
+.datalist{
+	flex: 1;
+	padding-left:30px;
+	padding-right:30px;
+	padding-bottom: 100px;
+	.wrap-list{
+		padding-top: 20px;
+		padding-bottom: 20px;
+		border-bottom-width: 1px;
+		border-color: #cccccc;
+		.product-image{
+			width: 150px;
+			height: 150px;
+			flex-shrink: 0;
+		}
+		.message-wrap{
+			flex: 1;
+			padding-left:  20px;
+			.msg-left{
+				flex-direction: column;
+				align-items: flex-start;
+				flex: 1;
+				.title{
+					font-size: 27px;
+					color: #666666;
+					lines: 2;
+					text-overflow: ellipsis;
+					line-height: 40px;
+				}
+				.porduct-meta{
+					font-size: 24px;
+					margin-top: 14px;
+					.fl{
+						font-size: 26px;
+						color: #ff9448;
+						margin-right: 10px
+					}
+					.fr{
+						text-decoration: line-through;
+					}
+				}
+			}
+			.msg-right{
+				flex-direction: column;
+				width: 150px;
+				margin-left: 10px;
+				.share{
+					padding: 15px;
+					text-align: center;
+					border-width:1px ;
+					border-color: #666666;
+					border-radius: 4px;
+					font-size: 30px;
+				}
+				.price-w{
+					flex-direction: column;
+					font-size: 23px;
+					font-weight: bold;
+					color: #ff9448;
+					padding-top: 10px
+				}
+			}
+		}
+	}
+}
+</style>

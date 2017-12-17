@@ -1,15 +1,17 @@
 <template>
-	<stack class="layered">
+	<div class="layered">
 		<slot></slot>
-		<div class="footer-wrap">
-			<block for="{{(index, item) in footerList}}" >
-				<div class="item" onclick="routes(item, index)">
-					<image class="icon" src="{{(index == active) ? item.img[1] : item.img[0]}}"></image>
-					<text class="pages">{{item.pages}}</text>
-				</div>
-			</block>
-		</div>
-	</stack>
+		<tabs>
+			<tab-bar class="footer-wrap">
+				<block for="{{(index, item) in footerList}}" >
+					<div class="item" onclick="routes(item, index)">
+						<image class="icon" src="{{(index == active) ? item.img[1] : item.img[0]}}"></image>
+						<text class="pages">{{item.pages}}</text>
+					</div>
+				</block>
+			</tab-bar>
+		</tabs>
+	</div>
 </template>
 
 <script>
@@ -41,13 +43,14 @@
 			]
 		},
 		routes(item, index) {
+			console.log(this.active, index)
+			if(this.active == index){
+				return
+			}
 			router.replace({
 		        uri: item.route,
 		        params: { current: index}
 		    })
-		},
-		onInit() {
-			console.log(this.active, 66666)
 		}
 	}
 </script>

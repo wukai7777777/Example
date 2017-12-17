@@ -1,7 +1,14 @@
+<import src="../common/components/port1.mix"></import>
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="container">
-    <text class="title">欢迎使用{{title}}</text>
+    <text class="title" @click="press">15455454</text>
+    <text>{{channel}}</text>
+    <block for="{{item in obj[channel]}}">
+      <text>{{item}}</text>
+    </block>
+
+    <port1 @wukai="getdata"></port1>
   </div>
 </template>
 
@@ -21,7 +28,25 @@
 <script>
   export default {
     data: {
-      title: '直达服务'
+      title: '直达服务',
+      obj: {
+        name: ['wukai','wukai','wukai','wukai','wukai','wukai']
+      },
+      channel: 'sex',
+      name:'name',
+      num: 0,
+      list: []
+    },
+    getdata(e){
+      //console.log(e.detail, 99999)
+    },
+    onInit() {
+      this.obj[this.channel] = [];
+    },
+    press() {
+      this.obj[this.channel].push('values')
+      console.log(JSON.stringify(this.obj[this.channel]))
     }
   }
+
 </script>

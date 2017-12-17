@@ -92,12 +92,16 @@
       },
       "msg-news-list": {
         "component": "index"
+      },
+      "Demo": {
+        "component": "index"
       }
     }
   },
   "display": {
     "titleBarBackgroundColor": "#f2f2f2",
     "titleBarTextColor": "#414141",
+    "titleBar": false,
     "pages": {
       "Demo": {
         "titleBarText": "Demo"
