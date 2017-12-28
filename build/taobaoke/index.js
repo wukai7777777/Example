@@ -680,8 +680,10 @@
 	module.exports = {
 	  "type": "list",
 	  "attr": {
+	    "id": "listdata",
 	    "scrollpage": function () {return true}
 	  },
+	  "id": "listdata",
 	  "events": {
 	    "scrollbottom": "getDateList",
 	    "scroll": "scroll"
@@ -691,132 +693,126 @@
 	  ],
 	  "children": [
 	    {
-	      "type": "block",
-	      "attr": {},
+	      "type": "list-item",
+	      "attr": {
+	        "type": "list-data",
+	        "show": "(channels in listDatas) ? true : false"
+	      },
 	      "repeat": {
 	        "exp": function () {return this.listDatas[this.channels]},
 	        "value": "item"
 	      },
+	      "classList": [
+	        "wrap-list"
+	      ],
+	      "events": {
+	        "click": function (evt) {this.goTodetail(evt)}
+	      },
 	      "children": [
 	        {
-	          "type": "list-item",
+	          "type": "image",
 	          "attr": {
-	            "type": "list-data",
-	            "show": "(channels in listDatas) ? true : false"
+	            "src": function () {return this.item.pict_url}
 	          },
 	          "classList": [
-	            "wrap-list"
+	            "product-image"
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "attr": {},
+	          "classList": [
+	            "message-wrap"
 	          ],
-	          "events": {
-	            "click": function (evt) {this.goTodetail(evt)}
-	          },
 	          "children": [
-	            {
-	              "type": "image",
-	              "attr": {
-	                "src": function () {return this.item.pict_url}
-	              },
-	              "classList": [
-	                "product-image"
-	              ]
-	            },
 	            {
 	              "type": "div",
 	              "attr": {},
 	              "classList": [
-	                "message-wrap"
+	                "msg-left"
 	              ],
 	              "children": [
 	                {
-	                  "type": "div",
-	                  "attr": {},
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.item.title}
+	                  },
 	                  "classList": [
-	                    "msg-left"
-	                  ],
-	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.title}
-	                      },
-	                      "classList": [
-	                        "title"
-	                      ]
-	                    },
-	                    {
-	                      "type": "div",
-	                      "attr": {},
-	                      "classList": [
-	                        "porduct-meta"
-	                      ],
-	                      "children": [
-	                        {
-	                          "type": "text",
-	                          "attr": {
-	                            "value": function () {return '¥' + (this.item.zk_final_price)}
-	                          },
-	                          "classList": [
-	                            "fl"
-	                          ]
-	                        },
-	                        {
-	                          "type": "text",
-	                          "attr": {
-	                            "value": function () {return '¥' + (this.item.price)}
-	                          },
-	                          "classList": [
-	                            "fr"
-	                          ]
-	                        }
-	                      ]
-	                    }
+	                    "title"
 	                  ]
 	                },
 	                {
 	                  "type": "div",
 	                  "attr": {},
 	                  "classList": [
-	                    "msg-right"
+	                    "porduct-meta"
 	                  ],
 	                  "children": [
 	                    {
 	                      "type": "text",
 	                      "attr": {
-	                        "value": "分享"
+	                        "value": function () {return '¥' + (this.item.zk_final_price)}
 	                      },
 	                      "classList": [
-	                        "share"
+	                        "fl"
 	                      ]
 	                    },
 	                    {
 	                      "type": "text",
-	                      "attr": {},
+	                      "attr": {
+	                        "value": function () {return '¥' + (this.item.price)}
+	                      },
 	                      "classList": [
-	                        "price-w"
-	                      ],
-	                      "children": [
-	                        {
-	                          "type": "span",
-	                          "attr": {
-	                            "value": " 赚 "
-	                          }
-	                        },
-	                        {
-	                          "type": "span",
-	                          "attr": {
-	                            "value": function () {return this.item.user_get_price}
-	                          },
-	                          "classList": [
-	                            "price"
-	                          ]
-	                        },
-	                        {
-	                          "type": "span",
-	                          "attr": {
-	                            "value": " 元 "
-	                          }
-	                        }
+	                        "fr"
 	                      ]
+	                    }
+	                  ]
+	                }
+	              ]
+	            },
+	            {
+	              "type": "div",
+	              "attr": {},
+	              "classList": [
+	                "msg-right"
+	              ],
+	              "children": [
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": "分享"
+	                  },
+	                  "classList": [
+	                    "share"
+	                  ]
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {},
+	                  "classList": [
+	                    "price-w"
+	                  ],
+	                  "children": [
+	                    {
+	                      "type": "span",
+	                      "attr": {
+	                        "value": " 赚 "
+	                      }
+	                    },
+	                    {
+	                      "type": "span",
+	                      "attr": {
+	                        "value": function () {return this.item.user_get_price}
+	                      },
+	                      "classList": [
+	                        "price"
+	                      ]
+	                    },
+	                    {
+	                      "type": "span",
+	                      "attr": {
+	                        "value": " 元 "
+	                      }
 	                    }
 	                  ]
 	                }
@@ -1489,9 +1485,9 @@
 			this.noDataStr = this.noData[this.curIndex];
 			this.isNextLoad[this.curIndex] = true;
 		},
+		onReady: function onReady() {},
 		callBackChannel: function callBackChannel() {
 			this.channels = this.channelArr[this.curIndex].channel;
-			this.listData[this.channels] = [];
 			this.getDateList();
 		},
 		selectChannel: function selectChannel() {
@@ -1500,17 +1496,26 @@
 			if (this.channels in this.listData) {
 				this.noDataStr = this.noData[this.curIndex];
 				this.loadingStr = this.loading[this.curIndex];
-				return;
+	
+				this.$element('listdata').scrollTo({ index: 0, smooth: true });
+	
+				this.listData[this.channels] = this.listData[this.channels].slice(0, 20);
+	
+				this.$emit('channeldata', this.listData);
+	
+				this.initialState(2);
 			} else {
-				this.page[this.curIndex] = 1;
-				this.listData[this.channels] = [];
-				this.loading[this.curIndex] = true;
-				this.loadingStr = this.loading[this.curIndex];
-				this.noData[this.curIndex] = false;
-				this.noDataStr = this.noData[this.curIndex];
-				this.isNextLoad[this.curIndex] = true;
+				this.initialState(1);
 				this.getDateList();
 			}
+		},
+		initialState: function initialState(page) {
+			this.page[this.curIndex] = page;
+			this.loading[this.curIndex] = true;
+			this.loadingStr = this.loading[this.curIndex];
+			this.noData[this.curIndex] = false;
+			this.noDataStr = this.noData[this.curIndex];
+			this.isNextLoad[this.curIndex] = true;
 		},
 		getDateList: function getDateList(isRefresh) {
 			var self = this;
@@ -1549,8 +1554,6 @@
 					accessToken: natives.accessToken
 				},
 				success: function success(data) {
-					console.log(1);
-	
 					if (!!data && !!data.data && !!JSON.parse(data.data).cityInfo && !!JSON.parse(data.data).data && JSON.parse(data.data).data.length > 0) {
 						var list = JSON.parse(data.data).data;
 						var len = JSON.parse(data.data).data.length;
@@ -1566,7 +1569,10 @@
 							self.listData[self.channels] = self.listData[self.channels].concat(list);
 						}
 	
+	
 						self.$emit('channeldata', self.listData);
+	
+	
 						console.log(list.length, 'length');
 						self.noData[self.curIndex] = false;
 	
@@ -1577,9 +1583,7 @@
 						self.loadingStr = self.loading[self.curIndex];
 	
 						++self.page[self.curIndex];
-						console.log(2);
 					} else if (JSON.parse(data.data).data.length == 0) {
-						console.log(3);
 						self.isNextLoad[self.curIndex] = false;
 	
 						self.noData[self.curIndex] = true;
@@ -1608,8 +1612,10 @@
 	module.exports = {
 	  "type": "layered",
 	  "attr": {
-	    "active": function () {return this.current}
+	    "active": function () {return this.current},
+	    "id": "container"
 	  },
+	  "id": "container",
 	  "children": [
 	    {
 	      "type": "div",
@@ -2093,8 +2099,6 @@
 	
 			this.isNextLoad = true;
 			this.isRefreshing = e.refreshing;
-			this.loadBanner();
-			this.getDateList(true);
 		},
 		hideMask: function hideMask() {
 			if (this.appearCount) {
@@ -2132,6 +2136,7 @@
 			});
 		},
 		changeIndex: function changeIndex(e) {
+			console.log('测试点击tabs 的onchange事件无响应');
 			this.curIndex = e.index;
 		}
 	};}

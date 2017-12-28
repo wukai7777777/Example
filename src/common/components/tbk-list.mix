@@ -1,13 +1,12 @@
 <import src="./bottom-loading.mix" name="bottom-loading"></import>
 <template>
-	<list onscrollBottom="getDateList" scrollpage="{{true}}" class="datalist" onscroll="scroll">
+	<list id="listdata" onscrollBottom="getDateList" scrollpage="{{true}}" class="datalist" onscroll="scroll">
 		<!-- <list-item type="ceshi">
 			<text class="">
-				{{noDataStr}}
+				{{listData}}
 			</text>
 		</list-item> -->
-		<block for="{{item in listDatas[channels]}}">
-			<list-item type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
+			<list-item for="{{item in listDatas[channels]}}" type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
 				<image class="product-image" src="{{item.pict_url}}"></image>
 				<div class="message-wrap">
 					<div class="msg-left">
@@ -27,7 +26,6 @@
 					</div>
 				</div>
 			</list-item>
-		</block>
 
 
 		<list-item type="bottom-loading">
@@ -83,15 +81,13 @@
 			this.noData[this.curIndex] = false;
 			this.noDataStr = this.noData[this.curIndex];
 			this.isNextLoad[this.curIndex] = true;
-
-			// setTimeout(() => {
-			// 	self.$emit('channeldata', {name: 'wukai'})
-			// }, 1000)
+		},
+		onReady() {
+			
 		},
 		callBackChannel() {
 			//父组件channel数据回调才执行 给对应channel初始化各种状态
 			this.channels = this.channelArr[this.curIndex].channel
-			this.listData[this.channels] = [];
 			this.getDateList();
 		},
 		selectChannel() {
@@ -99,22 +95,31 @@
 			this.channels = this.channelArr[this.curIndex].channel
 			//console.log(this.channels)
 			//已经点击过channels
-			if(this.channels in this.listData){
-				//第二次切换获取底部状态
-				this.noDataStr = this.noData[this.curIndex];
-				this.loadingStr = this.loading[this.curIndex];
-				return;
+			if(this.channels in this.listData){//非首次
+				//切换获取底部状态
+				this.noDataStr = this.noData[this.curIndex]
+				this.loadingStr = this.loading[this.curIndex]
+				//点击滚动到顶部
+				this.$element('listdata').scrollTo({index: 0, smooth: true})
+				//将下拉的多页数据截取为一页数据
+				this.listData[this.channels] = this.listData[this.channels].slice(0, 20)
+				//回传到父组件
+		        this.$emit('channeldata', this.listData)
+		        //设置对应channels加载第二页状态
+		        this.initialState(2)
 			}else{ //第一次点击channel
 				//当第一次点击对应channel初始化各种状态
-				this.page[this.curIndex] = 1;
-				this.listData[this.channels] = [];
-				this.loading[this.curIndex] = true;
-				this.loadingStr = this.loading[this.curIndex];
-				this.noData[this.curIndex] = false;
-				this.noDataStr = this.noData[this.curIndex];
-				this.isNextLoad[this.curIndex] = true;
+				this.initialState(1)
 				this.getDateList();
 			}
+		},
+		initialState(page) {
+			this.page[this.curIndex] = page;
+			this.loading[this.curIndex] = true;
+			this.loadingStr = this.loading[this.curIndex];
+			this.noData[this.curIndex] = false;
+			this.noDataStr = this.noData[this.curIndex];
+			this.isNextLoad[this.curIndex] = true;
 		},
 		getDateList(isRefresh) {
 			let self = this;
@@ -153,7 +158,6 @@
 	            accessToken: natives.accessToken
 	          },
 	          success(data) {
-	          	console.log(1)
 	          	//console.log(JSON.stringify(data))
 	          	//self.isRefreshing = false; //收起下拉刷新状态
 	          	if(!!data && !!data.data && !!JSON.parse(data.data).cityInfo 
@@ -173,7 +177,11 @@
 		          		self.listData[self.channels] = self.listData[self.channels].concat(list)
 		          	}
 		          	//回传到父组件
+		          	
 		          	self.$emit('channeldata', self.listData)
+		          	//this.$vm('listdata').set()
+		          	//console.log(self.$element('listdata'))
+
 		          	console.log(list.length, 'length')
 					self.noData[self.curIndex] = false;
 					//二次转存为了banding数据
@@ -184,9 +192,7 @@
      				self.loadingStr = self.loading[self.curIndex];
 
      				++self.page[self.curIndex] //加载对应channel的页数
-     				console.log(2)
 	          	} else if( JSON.parse(data.data).data.length == 0 ) {
-	          		console.log(3)
 	          		self.isNextLoad[self.curIndex] = false;
 	          		
 	          		self.noData[self.curIndex] = true;

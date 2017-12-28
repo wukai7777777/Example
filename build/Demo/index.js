@@ -43,12 +43,11 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(32)
+	__webpack_require__(1)
 	var $app_template$ = __webpack_require__(4)
 	var $app_style$ = __webpack_require__(5)
 	var $app_script$ = __webpack_require__(6)
@@ -66,8 +65,23 @@
 
 
 /***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 2:
+	var $app_template$ = __webpack_require__(2)
+	var $app_script$ = __webpack_require__(3)
+	
+	$app_define$('@app-component/port1', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	})
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -90,8 +104,7 @@
 	}
 
 /***/ },
-
-/***/ 3:
+/* 3 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -108,8 +121,7 @@
 	};}
 
 /***/ },
-
-/***/ 4:
+/* 4 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -164,8 +176,7 @@
 	}
 
 /***/ },
-
-/***/ 5:
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -181,8 +192,7 @@
 	}
 
 /***/ },
-
-/***/ 6:
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -211,26 +221,8 @@
 	  }
 	};}
 
-/***/ },
-
-/***/ 32:
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(2)
-	var $app_script$ = __webpack_require__(3)
-	
-	$app_define$('@app-component/port1', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	})
-
-
 /***/ }
-
-/******/ });
+/******/ ]);
   };
   if (typeof window === "undefined") {
     return createPageHandler();

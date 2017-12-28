@@ -3,8 +3,8 @@
 <import src="../common/components/stack.mix" name="layered"></import>
 <import src="../common/components/tbk-list.mix" name="tbk-list"></import>
 <template>
-		<layered active="{{current}}">
-		<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
+	<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
+		<layered active="{{current}}" id="container">
 				<div class="slot-wrap">
 					<div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
 						<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
@@ -157,8 +157,8 @@
 			// 更新刷新状态（属性refreshing的值从false改为true会触发refresh组件的状态更新，反之亦然
 			this.isNextLoad = true;
 			this.isRefreshing = e.refreshing;
-			this.loadBanner();
-			this.getDateList(true);
+			// this.loadBanner();
+			// this.getDateList(true);
 		},
 		hideMask() {
 			// 加载页面时，所有元素的appear事件都会被触发一次。因此，需要过滤第一次的appear事件
@@ -198,6 +198,7 @@
 			})
 		},
 		changeIndex(e) {
+			console.log('测试点击tabs 的onchange事件无响应');
 			this.curIndex = e.index;
 		}
 	}
