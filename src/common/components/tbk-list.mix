@@ -33,6 +33,7 @@
         </list-item>
 	</list>
 </template>
+
 <script>
 	import fetch from '@system.fetch'
 	import network from '@system.network'
@@ -99,12 +100,12 @@
 				//切换获取底部状态
 				this.noDataStr = this.noData[this.curIndex]
 				this.loadingStr = this.loading[this.curIndex]
-				//点击滚动到顶部
-				this.$element('listdata').scrollTo({index: 0, smooth: true})
 				//将下拉的多页数据截取为一页数据
 				this.listData[this.channels] = this.listData[this.channels].slice(0, 20)
 				//回传到父组件
 		        this.$emit('channeldata', this.listData)
+		        //点击滚动到顶部
+				this.$element('listdata').scrollTo({index: 0, smooth: true})
 		        //设置对应channels加载第二页状态
 		        this.initialState(2)
 			}else{ //第一次点击channel
@@ -167,12 +168,13 @@
 	     			let len = JSON.parse(data.data).data.length;
 		          	if(self.page[self.curIndex] == 1) {
 		          		self.listData[self.channels] = list;
+						//self.$set('listData.nihao', list)
 		          		// console.log(JSON.stringify(self.listData[self.channels]))
-		          		if(isRefresh) {
-		          			prompt.showToast({
-		          				message: '已经是最新了'
-		          			})
-		          		}
+		          		// if(isRefresh) {
+		          		// 	prompt.showToast({
+		          		// 		message: '已经是最新了'
+		          		// 	})
+		          		// }
 		          	} else {
 		          		self.listData[self.channels] = self.listData[self.channels].concat(list)
 		          	}
@@ -196,7 +198,7 @@
 	          		self.isNextLoad[self.curIndex] = false;
 	          		
 	          		self.noData[self.curIndex] = true;
-	          		//二次转存为了banding数据
+	          		//二次转存为了绑定数据
 					self.noDataStr = self.noData[self.curIndex]
 	          	}
 	          },

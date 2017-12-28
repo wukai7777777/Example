@@ -1497,11 +1497,11 @@
 				this.noDataStr = this.noData[this.curIndex];
 				this.loadingStr = this.loading[this.curIndex];
 	
-				this.$element('listdata').scrollTo({ index: 0, smooth: true });
-	
 				this.listData[this.channels] = this.listData[this.channels].slice(0, 20);
 	
 				this.$emit('channeldata', this.listData);
+	
+				this.$element('listdata').scrollTo({ index: 0, smooth: true });
 	
 				this.initialState(2);
 			} else {
@@ -1559,12 +1559,6 @@
 						var len = JSON.parse(data.data).data.length;
 						if (self.page[self.curIndex] == 1) {
 							self.listData[self.channels] = list;
-	
-							if (isRefresh) {
-								_system6.default.showToast({
-									message: '已经是最新了'
-								});
-							}
 						} else {
 							self.listData[self.channels] = self.listData[self.channels].concat(list);
 						}
@@ -1659,7 +1653,9 @@
 	          "children": [
 	            {
 	              "type": "tabs",
-	              "attr": {},
+	              "attr": {
+	                "index": function () {return this.curIndex}
+	              },
 	              "events": {
 	                "change": "changeIndex"
 	              },
@@ -1732,7 +1728,9 @@
 	          "children": [
 	            {
 	              "type": "tabs",
-	              "attr": {},
+	              "attr": {
+	                "index": function () {return this.curIndex}
+	              },
 	              "events": {
 	                "change": "changeIndex"
 	              },

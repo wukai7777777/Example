@@ -10,7 +10,7 @@
 						<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
 					</div>
 					<div class="tabs-wrap" show="{{channels.length>0}}">
-						<tabs onchange="changeIndex">
+						<tabs onchange="changeIndex" index="{{curIndex}}">
 							<tab-bar mode="scrollable" class="tabs-item">
 								<div class="channels" for="{{(index, item) in channels}}">
 									<text class="text">{{item.text}}</text>
@@ -23,7 +23,7 @@
 					<tbk-list list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list>
 
 					<div class="tabs-wrap" style="position:fixed;" show="{{isShow}}">
-						<tabs onchange="changeIndex">
+						<tabs onchange="changeIndex" index="{{curIndex}}">
 							<tab-bar mode="scrollable" class="tabs-item">
 								<div class="channels" for="{{(index, item) in channels}}">
 									<text class="text">{{item.text}}</text>
@@ -93,7 +93,7 @@
 			isShow: false,
 			appearCount: 0,
 			curIndex: 0,
-			listData: {}
+			listData: {},
 		},
 		onInit() {
 			let self = this

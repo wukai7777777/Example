@@ -1,52 +1,167 @@
-<import src="../common/components/port1.mix"></import>
 <template>
-  <!-- template里只能有一个根节点 -->
-  <div class="container">
-    <text class="title" @click="press">15455454</text>
-    <text>{{channel}}</text>
-    <block for="{{item in obj[channel]}}">
-      <text>{{item}}</text>
-    </block>
+  <div class="doc-page">
+    <div class="doc-row">
+      <text class="doc-row-desc" onclick="changeTest1">$set测试：vm上赋值：修改Test1</text>
+      <text class="doc-row-desc" onclick="addTest1Gender">$set测试：增加属性</text>
+      <text class="doc-row-desc" onclick="addTest1GenderBySet">$set测试：增加属性：通过$set</text>
+      <text class="doc-row-desc" onclick="delTest1">删除数据</text>
+      <text>{{test1 && test1.name}}</text>
+      <text>{{test1 && test1.gender}}</text>
+      <block v-for="{{text11.arr}}">
+        <text>{{$item}}</text>
+      </block>
+      <text @click="textPush">{{text11 && text11.arr}} {{12121}}</text>
+    </div>
 
-    <port1 @wukai="getdata"></port1>
+    <div class="doc-row">
+      <text class="doc-row-desc" onclick="changeTest2">$set测试：简单对象：修改Test2</text>
+      <text class="doc-row-desc" onclick="addTest2Gender">$set测试：增加属性</text>
+      <text class="doc-row-desc" onclick="addTest2GenderBySet">$set测试：增加属性：通过$set</text>
+      <text class="doc-row-desc" onclick="delTest2">删除数据</text>
+      <text>{{test2 && test2.name}}</text>
+      <text>{{test2 && test2.gender}}</text>
+    </div>
+
+    <div class="doc-row">
+      <text class="doc-row-desc" onclick="changeTest3">$set测试：简单对象：修改Test3</text>
+      <text class="doc-row-desc" onclick="addTest3Gender">$set测试：增加属性</text>
+      <text class="doc-row-desc" onclick="addTest3GenderBySet">$set测试：增加属性：通过$set</text>
+      <text class="doc-row-desc" onclick="delTest3">删除数据</text>
+      <text>{{test3 && test3.name}}</text>
+      <text>{{test3 && test3.gender && test3.gender.text}}</text>
+    </div>
+
+    <div class="doc-row">
+      <text class="doc-row-desc" onclick="addTest4">$set测试：对象数组：增加Test4</text>
+      <text class="doc-row-desc" onclick="addTest4BySet">$set测试：对象数组：使用$set增加Test4</text>
+      <text class="doc-row-desc" onclick="addTest4Object">$set测试：对象数组：增加Test4的对象</text>
+      <text class="doc-row-desc" onclick="addTest4ObjectBySet">$set测试：对象数组：使用$set增加Test4的对象</text>
+      <text class="doc-row-desc" onclick="modifyTest4Object">$set测试：对象数组：修改Test4的对象</text>
+      <text class="doc-row-desc" onclick="modifyTest4ObjectBySet">$set测试：对象数组：使用$set修改Test4的对象</text>
+      <text for="test4">{{$item.name + ' --- ' + $item.gender + ' --- ' + $item.age}}</text>
+    </div>
   </div>
 </template>
 
-<style>
-  .container {
+<style lang="less">
+  .doc-page{
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .title {
-    font-size: 40px;
-    text-align: center;
+    .doc-row{
+      flex-direction: column;
+      text{
+        padding: 20px;
+      }
+    }
   }
 </style>
-
 <script>
+  /**
+   * 标识：测试示例
+   * @desc 测试vm.$set()、vm.$delete()
+   */
+  // 补充用例
   export default {
     data: {
-      title: '直达服务',
-      obj: {
-        name: ['wukai','wukai','wukai','wukai','wukai','wukai']
+      test2: {
+        name: '张三'
       },
-      channel: 'sex',
-      name:'name',
-      num: 0,
-      list: []
+      test3: {
+        name: '张三'
+      }
     },
-    getdata(e){
-      //console.log(e.detail, 99999)
+    onInit () {
+      this.$page.setTitleBar({text: '$set(exp, val)测试'})
     },
-    onInit() {
-      this.obj[this.channel] = [];
+    //textPush
+    textPush() {
+      this.$set('text11', {
+        arr: []
+      })
+
+      this.text11.arr = ['wukai', 'nishi', 'tianxia']
     },
-    press() {
-      this.obj[this.channel].push('values')
-      console.log(JSON.stringify(this.obj[this.channel]))
+    // TEST1
+    changeTest1 () {
+      this.test1 = {
+        name: '李四',
+        gender: '男1'
+      }
+    },
+    addTest1Gender () {
+      this.test1.gender = '男2'
+    },
+    addTest1GenderBySet () {
+      this.$set('test1', {
+        name: '李四3',
+        gender: '男3'
+      })
+    },
+    delTest1 () {
+      this.$delete('test1')
+    },
+    // TEST2
+    changeTest2 () {
+      this.test2 = {
+        name: '李四',
+        gender: '男1'
+      }
+    },
+    addTest2Gender () {
+      this.test2.gender = '男2'
+    },
+    addTest2GenderBySet () {
+      this.$set('test2.gender', ['nihaoma', 'wohen', 'purple'])
+    },
+    delTest2 () {
+      this.$delete('test2')
+    },
+    // TEST3
+    changeTest3 () {
+      this.test3 = {
+        name: '李四',
+        gender: { text: '男1' }
+      }
+    },
+    addTest3Gender () {
+      this.test3.gender.text = '男2'
+    },
+    addTest3GenderBySet () {
+      this.$set('test3.gender', { text: '男3' })
+    },
+    delTest3 () {
+      this.$delete('test3')
+    },
+    // TEST4
+    addTest4 () {
+      this.test4 = []
+    },
+    addTest4Object () {
+      this.test4.push({
+        name: '张三',
+        gender: '男1'
+      })
+    },
+    addTest4BySet () {
+      this.$set('test4', [])
+    },
+    addTest4ObjectBySet () {
+//      this.$set('test4[0]', {
+//        name: '李四',
+//        gender: '男2'
+//      })
+      this.$set('test4.0', {
+        name: '李四',
+        gender: '男2'
+      })
+    },
+    modifyTest4Object () {
+      this.test4[0].age = 21
+    },
+    modifyTest4ObjectBySet () {
+//      this.$set('test4[0]age', 23)
+      this.$set('test4.0.age', 23)
     }
   }
 
+  
 </script>
