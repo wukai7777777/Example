@@ -688,9 +688,7 @@
 	    "scrollbottom": "getDateList",
 	    "scroll": "scroll"
 	  },
-	  "classList": [
-	    "datalist"
-	  ],
+	  "classList": function () {return ['datalist', this.isShow?'padbot':'']},
 	  "children": [
 	    {
 	      "type": "list-item",
@@ -845,6 +843,9 @@
 /***/ function(module, exports) {
 
 	module.exports = {
+	  ".padbot": {
+	    "paddingTop": "100px"
+	  },
 	  ".datalist": {
 	    "flex": 1,
 	    "paddingLeft": "30px",
@@ -1456,6 +1457,10 @@
 			curIndex: {
 				type: Number,
 				default: 0
+			},
+			isShow: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data: function data() {
@@ -1706,6 +1711,7 @@
 	        {
 	          "type": "tbk-list",
 	          "attr": {
+	            "isShow": function () {return this.isShow},
 	            "listDatas": function () {return this.listData},
 	            "curIndex": function () {return this.curIndex},
 	            "channelArr": function () {return this.channels}

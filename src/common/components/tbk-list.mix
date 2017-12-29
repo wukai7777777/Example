@@ -1,9 +1,9 @@
 <import src="./bottom-loading.mix" name="bottom-loading"></import>
 <template>
-	<list id="listdata" onscrollBottom="getDateList" scrollpage="{{true}}" class="datalist" onscroll="scroll">
+	<list id="listdata" onscrollBottom="getDateList" scrollpage="{{true}}" class="datalist {{isShow ? 'padbot' : ''}}" onscroll="scroll">
 		<!-- <list-item type="ceshi">
-			<text class="">
-				{{listData}}
+			<text class="" style="background-color: red">
+				{{isShow}}
 			</text>
 		</list-item> -->
 			<list-item for="{{item in listDatas[channels]}}" type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
@@ -53,6 +53,10 @@
 			curIndex: {
 				type: Number,
 				default: 0
+			},
+			isShow: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data(){
@@ -217,6 +221,9 @@
 	}
 </script>
 <style lang="less">
+.padbot{
+	padding-top: 100px;
+}
 .datalist{
 	flex: 1;
 	padding-left:30px;
@@ -282,4 +289,7 @@
 		}
 	}
 }
+
+
+
 </style>

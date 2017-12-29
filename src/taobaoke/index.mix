@@ -19,8 +19,8 @@
 							</tab-bar>
 						</tabs>
 					</div>
-					
-					<tbk-list list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list>
+
+					<tbk-list is-show="{{isShow}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list>
 
 					<div class="tabs-wrap" style="position:fixed;" show="{{isShow}}">
 						<tabs onchange="changeIndex" index="{{curIndex}}">
