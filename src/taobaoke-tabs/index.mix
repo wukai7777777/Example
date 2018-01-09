@@ -1,77 +1,41 @@
 
-<import src="../common/components/swiper.mix" name="banner"></import>
+<!-- <import src="../common/components/swiper.mix" name="banner"></import> -->
 <import src="../common/components/stack.mix" name="layered"></import>
-<import src="../common/components/tbk-list.mix" name="tbk-list"></import>
+<import src="../common/components/tbk-contents.mix" name="contents"></import>
 <template>
 	<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
 		<layered active="{{current}}" id="container">
-				<div class="slot-wrap"></div>
-					<div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
-						<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
-					</div>
-					<div class="tabs-wrap" show="{{channels.length>0}}">
-						<tabs onchange="changeIndex" index="{{curIndex}}">
-							<tab-bar mode="scrollable" class="tabs-item">
-								<div class="channels" for="{{(index, item) in channels}}">
-									<text class="text">{{item.text}}</text>
-									<div class="line {{index == curIndex ? 'active' : ''}}"></div>
-								</div>
-							</tab-bar>
-						</tabs>
-					</div>
+				<!-- <div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
+					<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
+				</div> -->
 
-					<tbk-list is-show="{{isShow}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list>
+				
+				<!-- <div class="tabs-wrap" show="{{channels.length>0}}" ondisappear="showMask" onappear="hideMask">
+					<tabs onchange="changeIndex" index="{{curIndex}}">
+						<tab-bar mode="scrollable" class="tabs-item">
+							<div class="channels" for="{{(index, item) in channels}}">
+								<text class="text">{{item.text}}</text>
+								<div class="line {{index == curIndex ? 'active' : ''}}"></div>
+							</div>
+						</tab-bar>
+					</tabs>
+				</div> -->
 
-					<div class="tabs-wrap" style="position:fixed;" show="{{isShow}}">
-						<tabs onchange="changeIndex" index="{{curIndex}}">
-							<tab-bar mode="scrollable" class="tabs-item">
-								<div class="channels" for="{{(index, item) in channels}}">
-									<text class="text">{{item.text}}</text>
-									<div class="line {{index == curIndex ? 'active' : ''}}"></div>
-								</div>
-							</tab-bar>
-						</tabs>
-					</div>
-				</div>
+				<tabs class="tabs-wrap slot-wrap" style="position:fixed;" onchange="changeIndex" index="{{curIndex}}">
+					<tab-bar mode="scrollable" class="tabs-item">
+						<div class="channels" for="{{(index, item) in channels}}">
+							<text class="text">{{item.text}}</text>
+							<div class="line {{index == curIndex ? 'active' : ''}}"></div>
+						</div>
+					</tab-bar>
+					<contents scroll-page="{{scrollPage}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></contents>
+				</tabs>
+
+				<!-- <tbk-list scroll-page="{{scrollPage}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list> -->
 		</layered>
 	<!-- </refresh> -->
 </template>
-<style lang="less">
-	.tabs-wrap{
-		background-color: #ffffff;
-		.tabs-item{
-			flex-direction: row;
-			flex: 1;
-			border-bottom-width: 1px ;
-			border-color: #cccccc;
-			.channels{
-				flex: 1;
-				flex-direction: column;
-				width: 200px;
-				height: 88px;
-				align-items: center;
-				.text{
-					flex-shrink: 0;
-					color: #666666;
-					line-height: 60px;
-				}
-				.line{
-					width: 40px;
-					height: 8px;
-					border-radius: 4px;
-					margin-top: 8px;
-				}
-				.active{
-					background-color: #ff9448;
-				}
-			}
-		}
-	}
-	.slot-wrap{
-		flex-direction: column;
-	}
-	
-</style>
+
 <script>
 	import fetch from '@system.fetch'
 	import network from '@system.network'
@@ -94,6 +58,7 @@
 			appearCount: 0,
 			curIndex: 0,
 			listData: {},
+			scrollPage: true
 		},
 		onInit() {
 			let self = this
@@ -204,3 +169,38 @@
 	}
 
 </script>
+
+<style lang="less">
+	.tabs-wrap{
+		padding-top: 100px;
+		background-color: #ffffff;
+		.tabs-item{
+			flex-direction: row;
+			flex: 1;
+			border-bottom-width: 1px ;
+			border-color: #cccccc;
+			.channels{
+				flex: 1;
+				flex-direction: column;
+				width: 200px;
+				height: 88px;
+				align-items: center;
+				.text{
+					flex-shrink: 0;
+					color: #666666;
+					line-height: 60px;
+				}
+				.line{
+					width: 40px;
+					height: 8px;
+					border-radius: 4px;
+					margin-top: 8px;
+				}
+				.active{
+					background-color: #ff9448;
+				}
+			}
+		}
+	}
+	
+</style>

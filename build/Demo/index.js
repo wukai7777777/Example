@@ -43,14 +43,13 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(4)
-	var $app_style$ = __webpack_require__(32)
-	var $app_script$ = __webpack_require__(6)
+	var $app_template$ = __webpack_require__(1)
+	var $app_style$ = __webpack_require__(2)
+	var $app_script$ = __webpack_require__(3)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -65,8 +64,7 @@
 
 
 /***/ },
-
-/***/ 4:
+/* 1 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -145,9 +143,8 @@
 	        },
 	        {
 	          "type": "block",
-	          "attr": {
-	            "vFor": function () {return this.text11.arr}
-	          },
+	          "attr": {},
+	          "repeat": function () {return this.text11.arr},
 	          "children": [
 	            {
 	              "type": "text",
@@ -398,8 +395,75 @@
 	}
 
 /***/ },
+/* 2 */
+/***/ function(module, exports) {
 
-/***/ 6:
+	module.exports = {
+	  ".doc-page": {
+	    "flexDirection": "column"
+	  },
+	  ".doc-page .doc-row": {
+	    "flexDirection": "column",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "doc-page"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "doc-row"
+	        }
+	      ]
+	    }
+	  },
+	  ".doc-page .doc-row text": {
+	    "paddingTop": "20px",
+	    "paddingRight": "20px",
+	    "paddingBottom": "20px",
+	    "paddingLeft": "20px",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "doc-page"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "doc-row"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "t",
+	          "n": "text"
+	        }
+	      ]
+	    }
+	  }
+	}
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -500,78 +564,8 @@
 	  }
 	};}
 
-/***/ },
-
-/***/ 32:
-/***/ function(module, exports) {
-
-	module.exports = {
-	  ".doc-page": {
-	    "flexDirection": "column"
-	  },
-	  ".doc-page .doc-row": {
-	    "flexDirection": "column",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "doc-page"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "doc-row"
-	        }
-	      ]
-	    }
-	  },
-	  ".doc-page .doc-row text": {
-	    "paddingTop": "20px",
-	    "paddingRight": "20px",
-	    "paddingBottom": "20px",
-	    "paddingLeft": "20px",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "doc-page"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "doc-row"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "t",
-	          "n": "text"
-	        }
-	      ]
-	    }
-	  }
-	}
-
 /***/ }
-
-/******/ });
+/******/ ]);
   };
   if (typeof window === "undefined") {
     return createPageHandler();

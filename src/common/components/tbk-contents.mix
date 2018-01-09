@@ -1,37 +1,39 @@
 <import src="./bottom-loading.mix" name="bottom-loading"></import>
 <template>
-	<list id="listdata" onscrollBottom="getDateList" scrollpage="{{scrollPage}}" class="datalist {{isShow ? 'padbot' : ''}}" onscroll="scroll">
-		<!-- <list-item type="ceshi">
-			<text class="" style="background-color: red">
-				{{scrollPage}}
-			</text>
-		</list-item> -->
-			<list-item for="{{item in listDatas[channels]}}" type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
-				<image class="product-image" src="{{item.pict_url}}"></image>
-				<div class="message-wrap">
-					<div class="msg-left">
-						<text class="title">{{item.title}}</text>
-						<div class="porduct-meta">
-							<text class="fl">¥{{item.zk_final_price}}</text>
-							<text class="fr">¥{{item.price}}</text>
+	<tab-content>
+		<list id="listdata" onscrollBottom="getDateList" scrollpage="{{scrollPage}}" class="datalist {{isShow ? 'padbot' : ''}}" onscroll="scroll">
+			<!-- <list-item type="ceshi">
+				<text class="" style="background-color: red">
+					{{scrollPage}}
+				</text>
+			</list-item> -->
+				<list-item for="{{item in listDatas[channels]}}" type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
+					<image class="product-image" src="{{item.pict_url}}"></image>
+					<div class="message-wrap">
+						<div class="msg-left">
+							<text class="title">{{item.title}}</text>
+							<div class="porduct-meta">
+								<text class="fl">¥{{item.zk_final_price}}</text>
+								<text class="fr">¥{{item.price}}</text>
+							</div>
+						</div>
+						<div class="msg-right">
+							<text class="share">分享</text>
+							<text class="price-w">
+								赚
+								<span class="price">{{item.user_get_price}}</span>
+								元
+							</text>
 						</div>
 					</div>
-					<div class="msg-right">
-						<text class="share">分享</text>
-						<text class="price-w">
-							赚
-							<span class="price">{{item.user_get_price}}</span>
-							元
-						</text>
-					</div>
-				</div>
-			</list-item>
+				</list-item>
 
 
-		<list-item type="bottom-loading">
-            <bottom-loading :loading="{{loadingStr}}" :no-data="{{noDataStr}}"></bottom-loading>
-        </list-item>
-	</list>
+			<list-item type="bottom-loading">
+	            <bottom-loading :loading="{{loadingStr}}" :no-data="{{noDataStr}}"></bottom-loading>
+	        </list-item>
+		</list>
+	</tab-content>
 </template>
 
 <script>
@@ -224,6 +226,7 @@
 		}
 	}
 </script>
+
 <style lang="less">
 .padbot{
 	padding-top: 100px;
@@ -293,7 +296,4 @@
 		}
 	}
 }
-
-
-
 </style>

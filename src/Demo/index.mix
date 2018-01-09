@@ -7,7 +7,7 @@
       <text class="doc-row-desc" onclick="delTest1">删除数据</text>
       <text>{{test1 && test1.name}}</text>
       <text>{{test1 && test1.gender}}</text>
-      <block v-for="{{text11.arr}}">
+      <block for="{{text11.arr}}">
         <text>{{$item}}</text>
       </block>
       <text @click="textPush">{{text11 && text11.arr}} {{12121}}</text>

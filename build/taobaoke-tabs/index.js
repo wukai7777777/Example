@@ -47,12 +47,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(29)
 	__webpack_require__(10)
-	__webpack_require__(22)
-	var $app_template$ = __webpack_require__(33)
-	var $app_style$ = __webpack_require__(34)
-	var $app_script$ = __webpack_require__(35)
+	__webpack_require__(18)
+	var $app_template$ = __webpack_require__(26)
+	var $app_style$ = __webpack_require__(27)
+	var $app_script$ = __webpack_require__(28)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -516,19 +515,15 @@
 /* 15 */,
 /* 16 */,
 /* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(6)
-	var $app_template$ = __webpack_require__(23)
-	var $app_style$ = __webpack_require__(24)
-	var $app_script$ = __webpack_require__(25)
+	var $app_template$ = __webpack_require__(19)
+	var $app_style$ = __webpack_require__(20)
+	var $app_script$ = __webpack_require__(21)
 	
-	$app_define$('@app-component/tbk-list', [], function($app_require$, $app_exports$, $app_module$){
+	$app_define$('@app-component/contents', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
 	     if ($app_exports$.__esModule && $app_exports$.default) {
 	            $app_module$.exports = $app_exports$.default
@@ -539,164 +534,170 @@
 
 
 /***/ },
-/* 23 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "list",
-	  "attr": {
-	    "id": "listdata",
-	    "scrollpage": function () {return this.scrollPage}
-	  },
-	  "id": "listdata",
-	  "events": {
-	    "scrollbottom": "getDateList",
-	    "scroll": "scroll"
-	  },
-	  "classList": function () {return ['datalist', this.isShow?'padbot':'']},
+	  "type": "tab-content",
+	  "attr": {},
 	  "children": [
 	    {
-	      "type": "list-item",
+	      "type": "list",
 	      "attr": {
-	        "type": "list-data",
-	        "show": "(channels in listDatas) ? true : false"
+	        "id": "listdata",
+	        "scrollpage": function () {return this.scrollPage}
 	      },
-	      "repeat": {
-	        "exp": function () {return this.listDatas[this.channels]},
-	        "value": "item"
-	      },
-	      "classList": [
-	        "wrap-list"
-	      ],
+	      "id": "listdata",
 	      "events": {
-	        "click": function (evt) {this.goTodetail(evt)}
+	        "scrollbottom": "getDateList",
+	        "scroll": "scroll"
 	      },
+	      "classList": function () {return ['datalist', this.isShow?'padbot':'']},
 	      "children": [
 	        {
-	          "type": "image",
+	          "type": "list-item",
 	          "attr": {
-	            "src": function () {return this.item.pict_url}
+	            "type": "list-data",
+	            "show": "(channels in listDatas) ? true : false"
+	          },
+	          "repeat": {
+	            "exp": function () {return this.listDatas[this.channels]},
+	            "value": "item"
 	          },
 	          "classList": [
-	            "product-image"
-	          ]
-	        },
-	        {
-	          "type": "div",
-	          "attr": {},
-	          "classList": [
-	            "message-wrap"
+	            "wrap-list"
 	          ],
+	          "events": {
+	            "click": function (evt) {this.goTodetail(evt)}
+	          },
 	          "children": [
 	            {
-	              "type": "div",
-	              "attr": {},
+	              "type": "image",
+	              "attr": {
+	                "src": function () {return this.item.pict_url}
+	              },
 	              "classList": [
-	                "msg-left"
-	              ],
-	              "children": [
-	                {
-	                  "type": "text",
-	                  "attr": {
-	                    "value": function () {return this.item.title}
-	                  },
-	                  "classList": [
-	                    "title"
-	                  ]
-	                },
-	                {
-	                  "type": "div",
-	                  "attr": {},
-	                  "classList": [
-	                    "porduct-meta"
-	                  ],
-	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return '¥' + (this.item.zk_final_price)}
-	                      },
-	                      "classList": [
-	                        "fl"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return '¥' + (this.item.price)}
-	                      },
-	                      "classList": [
-	                        "fr"
-	                      ]
-	                    }
-	                  ]
-	                }
+	                "product-image"
 	              ]
 	            },
 	            {
 	              "type": "div",
 	              "attr": {},
 	              "classList": [
-	                "msg-right"
+	                "message-wrap"
 	              ],
 	              "children": [
 	                {
-	                  "type": "text",
-	                  "attr": {
-	                    "value": "分享"
-	                  },
-	                  "classList": [
-	                    "share"
-	                  ]
-	                },
-	                {
-	                  "type": "text",
+	                  "type": "div",
 	                  "attr": {},
 	                  "classList": [
-	                    "price-w"
+	                    "msg-left"
 	                  ],
 	                  "children": [
 	                    {
-	                      "type": "span",
+	                      "type": "text",
 	                      "attr": {
-	                        "value": " 赚 "
-	                      }
-	                    },
-	                    {
-	                      "type": "span",
-	                      "attr": {
-	                        "value": function () {return this.item.user_get_price}
+	                        "value": function () {return this.item.title}
 	                      },
 	                      "classList": [
-	                        "price"
+	                        "title"
 	                      ]
 	                    },
 	                    {
-	                      "type": "span",
+	                      "type": "div",
+	                      "attr": {},
+	                      "classList": [
+	                        "porduct-meta"
+	                      ],
+	                      "children": [
+	                        {
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return '¥' + (this.item.zk_final_price)}
+	                          },
+	                          "classList": [
+	                            "fl"
+	                          ]
+	                        },
+	                        {
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return '¥' + (this.item.price)}
+	                          },
+	                          "classList": [
+	                            "fr"
+	                          ]
+	                        }
+	                      ]
+	                    }
+	                  ]
+	                },
+	                {
+	                  "type": "div",
+	                  "attr": {},
+	                  "classList": [
+	                    "msg-right"
+	                  ],
+	                  "children": [
+	                    {
+	                      "type": "text",
 	                      "attr": {
-	                        "value": " 元 "
-	                      }
+	                        "value": "分享"
+	                      },
+	                      "classList": [
+	                        "share"
+	                      ]
+	                    },
+	                    {
+	                      "type": "text",
+	                      "attr": {},
+	                      "classList": [
+	                        "price-w"
+	                      ],
+	                      "children": [
+	                        {
+	                          "type": "span",
+	                          "attr": {
+	                            "value": " 赚 "
+	                          }
+	                        },
+	                        {
+	                          "type": "span",
+	                          "attr": {
+	                            "value": function () {return this.item.user_get_price}
+	                          },
+	                          "classList": [
+	                            "price"
+	                          ]
+	                        },
+	                        {
+	                          "type": "span",
+	                          "attr": {
+	                            "value": " 元 "
+	                          }
+	                        }
+	                      ]
 	                    }
 	                  ]
 	                }
 	              ]
 	            }
 	          ]
-	        }
-	      ]
-	    },
-	    {
-	      "type": "list-item",
-	      "attr": {
-	        "type": "bottom-loading"
-	      },
-	      "children": [
+	        },
 	        {
-	          "type": "bottom-loading",
+	          "type": "list-item",
 	          "attr": {
-	            "loading": function () {return this.loadingStr},
-	            "noData": function () {return this.noDataStr}
-	          }
+	            "type": "bottom-loading"
+	          },
+	          "children": [
+	            {
+	              "type": "bottom-loading",
+	              "attr": {
+	                "loading": function () {return this.loadingStr},
+	                "noData": function () {return this.noDataStr}
+	              }
+	            }
+	          ]
 	        }
 	      ]
 	    }
@@ -704,7 +705,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1282,7 +1283,7 @@
 	}
 
 /***/ },
-/* 25 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1474,146 +1475,11 @@
 	};}
 
 /***/ },
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(30)
-	var $app_style$ = __webpack_require__(31)
-	var $app_script$ = __webpack_require__(32)
-	
-	$app_define$('@app-component/banner', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	     $app_module$.exports.style = $app_style$
-	})
-
-
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "type": "swiper",
-	  "attr": {
-	    "autoplay": function () {return this.autoPlay},
-	    "interval": function () {return this.interval},
-	    "indicator": function () {return this.indicator}
-	  },
-	  "classList": [
-	    "swiper"
-	  ],
-	  "children": [
-	    {
-	      "type": "block",
-	      "attr": {},
-	      "repeat": function () {return this.banners},
-	      "children": [
-	        {
-	          "type": "image",
-	          "attr": {
-	            "src": function () {return this.$item.imageUrl}
-	          },
-	          "classList": [
-	            "banners"
-	          ],
-	          "events": {
-	            "click": function (evt) {this.goToBnaner(this.$item.redirectUrl,evt)}
-	          }
-	        }
-	      ]
-	    }
-	  ]
-	}
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  ".swiper-wrap": {
-	    "paddingTop": "30px",
-	    "paddingBottom": "30px"
-	  },
-	  ".swiper-wrap .swiper": {
-	    "flexDirection": "column",
-	    "width": "100%",
-	    "slideWidth": "100%",
-	    "height": "250px",
-	    "resizeMode": "cover",
-	    "indicatorColor": "rgba(0,0,0,0.2)",
-	    "indicatorSelectedColor": "#FFFF00",
-	    "indicatorSize": "10px",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "swiper-wrap"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "swiper"
-	        }
-	      ]
-	    }
-	  }
-	}
-
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	module.exports = function(module, exports, $app_require$){'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _system = $app_require$('@app-module/system.fetch');
-	
-	var _system2 = _interopRequireDefault(_system);
-	
-	var _system3 = $app_require$('@app-module/system.network');
-	
-	var _system4 = _interopRequireDefault(_system3);
-	
-	var _system5 = $app_require$('@app-module/system.prompt');
-	
-	var _system6 = _interopRequireDefault(_system5);
-	
-	var _system7 = $app_require$('@app-module/system.webview');
-	
-	var _system8 = _interopRequireDefault(_system7);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-		props: ['banners', "autoPlay", "interval", "indicator"],
-		onReady: function onReady() {},
-		goToBnaner: function goToBnaner(url) {
-			console.log(url);
-			_system8.default.loadUrl({
-				url: url
-			});
-		}
-	};}
-
-/***/ },
-/* 33 */
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1625,170 +1491,71 @@
 	  "id": "container",
 	  "children": [
 	    {
-	      "type": "div",
-	      "attr": {},
+	      "type": "tabs",
+	      "attr": {
+	        "index": function () {return this.curIndex}
+	      },
 	      "classList": [
+	        "tabs-wrap",
 	        "slot-wrap"
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "attr": {
-	        "show": "bannerData.length>0"
-	      },
-	      "classList": [
-	        "swiper-wrap"
-	      ],
-	      "events": {
-	        "disappear": "showMask",
-	        "appear": "hideMask"
-	      },
-	      "children": [
-	        {
-	          "type": "banner",
-	          "attr": {
-	            "banners": function () {return this.bannerData},
-	            "interval": function () {return this.interval},
-	            "autoPlay": function () {return this.autoPlay},
-	            "indicator": function () {return this.indicator}
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "attr": {
-	        "show": function () {return this.channels.length>0}
-	      },
-	      "classList": [
-	        "tabs-wrap"
-	      ],
-	      "children": [
-	        {
-	          "type": "tabs",
-	          "attr": {
-	            "index": function () {return this.curIndex}
-	          },
-	          "events": {
-	            "change": "changeIndex"
-	          },
-	          "children": [
-	            {
-	              "type": "tab-bar",
-	              "attr": {
-	                "mode": "scrollable"
-	              },
-	              "classList": [
-	                "tabs-item"
-	              ],
-	              "children": [
-	                {
-	                  "type": "div",
-	                  "attr": {},
-	                  "classList": [
-	                    "channels"
-	                  ],
-	                  "repeat": {
-	                    "exp": function () {return this.channels},
-	                    "key": "index",
-	                    "value": "item"
-	                  },
-	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.text}
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "div",
-	                      "attr": {},
-	                      "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
-	                    }
-	                  ]
-	                }
-	              ]
-	            }
-	          ]
-	        }
-	      ]
-	    },
-	    {
-	      "type": "tbk-list",
-	      "attr": {
-	        "isShow": function () {return this.isShow},
-	        "listDatas": function () {return this.listData},
-	        "curIndex": function () {return this.curIndex},
-	        "channelArr": function () {return this.channels}
-	      },
-	      "events": {
-	        "channeldata": "getListData"
-	      }
-	    },
-	    {
-	      "type": "div",
-	      "attr": {
-	        "show": function () {return this.isShow}
-	      },
-	      "classList": [
-	        "tabs-wrap"
 	      ],
 	      "style": {
 	        "position": "fixed"
 	      },
+	      "events": {
+	        "change": "changeIndex"
+	      },
 	      "children": [
 	        {
-	          "type": "tabs",
+	          "type": "tab-bar",
 	          "attr": {
-	            "index": function () {return this.curIndex}
+	            "mode": "scrollable"
 	          },
-	          "events": {
-	            "change": "changeIndex"
-	          },
+	          "classList": [
+	            "tabs-item"
+	          ],
 	          "children": [
 	            {
-	              "type": "tab-bar",
-	              "attr": {
-	                "mode": "scrollable"
-	              },
+	              "type": "div",
+	              "attr": {},
 	              "classList": [
-	                "tabs-item"
+	                "channels"
 	              ],
+	              "repeat": {
+	                "exp": function () {return this.channels},
+	                "key": "index",
+	                "value": "item"
+	              },
 	              "children": [
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.item.text}
+	                  },
+	                  "classList": [
+	                    "text"
+	                  ]
+	                },
 	                {
 	                  "type": "div",
 	                  "attr": {},
-	                  "classList": [
-	                    "channels"
-	                  ],
-	                  "repeat": {
-	                    "exp": function () {return this.channels},
-	                    "key": "index",
-	                    "value": "item"
-	                  },
-	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.text}
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
-	                    {
-	                      "type": "div",
-	                      "attr": {},
-	                      "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
-	                    }
-	                  ]
+	                  "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
 	                }
 	              ]
 	            }
 	          ]
+	        },
+	        {
+	          "type": "contents",
+	          "attr": {
+	            "scrollPage": function () {return this.scrollPage},
+	            "listDatas": function () {return this.listData},
+	            "curIndex": function () {return this.curIndex},
+	            "channelArr": function () {return this.channels}
+	          },
+	          "events": {
+	            "channeldata": "getListData"
+	          }
 	        }
 	      ]
 	    }
@@ -1796,11 +1563,12 @@
 	}
 
 /***/ },
-/* 34 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = {
 	  ".tabs-wrap": {
+	    "paddingTop": "100px",
 	    "backgroundColor": "#ffffff"
 	  },
 	  ".tabs-wrap .tabs-item": {
@@ -2007,14 +1775,11 @@
 	        }
 	      ]
 	    }
-	  },
-	  ".slot-wrap": {
-	    "flexDirection": "column"
 	  }
 	}
 
 /***/ },
-/* 35 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -2057,7 +1822,8 @@
 			isShow: false,
 			appearCount: 0,
 			curIndex: 0,
-			listData: {}
+			listData: {},
+			scrollPage: true
 		},
 		onInit: function onInit() {
 			var self = this;
