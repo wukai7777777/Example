@@ -47,12 +47,12 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(21)
-	__webpack_require__(13)
-	__webpack_require__(25)
-	var $app_template$ = __webpack_require__(29)
-	var $app_style$ = __webpack_require__(30)
-	var $app_script$ = __webpack_require__(31)
+	__webpack_require__(29)
+	__webpack_require__(10)
+	__webpack_require__(22)
+	var $app_template$ = __webpack_require__(33)
+	var $app_style$ = __webpack_require__(34)
+	var $app_script$ = __webpack_require__(35)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -72,15 +72,12 @@
 /* 3 */,
 /* 4 */,
 /* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(10)
-	var $app_style$ = __webpack_require__(11)
-	var $app_script$ = __webpack_require__(12)
+	var $app_template$ = __webpack_require__(7)
+	var $app_style$ = __webpack_require__(8)
+	var $app_script$ = __webpack_require__(9)
 	
 	$app_define$('@app-component/bottom-loading', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -93,7 +90,7 @@
 
 
 /***/ },
-/* 10 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -149,7 +146,7 @@
 	}
 
 /***/ },
-/* 11 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -182,7 +179,7 @@
 	}
 
 /***/ },
-/* 12 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -195,12 +192,12 @@
 	};}
 
 /***/ },
-/* 13 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(14)
-	var $app_style$ = __webpack_require__(15)
-	var $app_script$ = __webpack_require__(16)
+	var $app_template$ = __webpack_require__(11)
+	var $app_style$ = __webpack_require__(12)
+	var $app_script$ = __webpack_require__(13)
 	
 	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -213,7 +210,7 @@
 
 
 /***/ },
-/* 14 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -287,7 +284,7 @@
 	}
 
 /***/ },
-/* 15 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -466,7 +463,7 @@
 	}
 
 /***/ },
-/* 16 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -515,153 +512,21 @@
 	};}
 
 /***/ },
+/* 14 */,
+/* 15 */,
+/* 16 */,
 /* 17 */,
 /* 18 */,
 /* 19 */,
 /* 20 */,
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(22)
-	var $app_style$ = __webpack_require__(23)
-	var $app_script$ = __webpack_require__(24)
-	
-	$app_define$('@app-component/banner', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	     $app_module$.exports.style = $app_style$
-	})
-
-
-/***/ },
+/* 21 */,
 /* 22 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "type": "swiper",
-	  "attr": {
-	    "autoplay": function () {return this.autoPlay},
-	    "interval": function () {return this.interval},
-	    "indicator": function () {return this.indicator}
-	  },
-	  "classList": [
-	    "swiper"
-	  ],
-	  "children": [
-	    {
-	      "type": "block",
-	      "attr": {},
-	      "repeat": function () {return this.banners},
-	      "children": [
-	        {
-	          "type": "image",
-	          "attr": {
-	            "src": function () {return this.$item.imageUrl}
-	          },
-	          "classList": [
-	            "banners"
-	          ],
-	          "events": {
-	            "click": function (evt) {this.goToBnaner(this.$item.redirectUrl,evt)}
-	          }
-	        }
-	      ]
-	    }
-	  ]
-	}
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  ".swiper-wrap": {
-	    "paddingTop": "30px",
-	    "paddingBottom": "30px"
-	  },
-	  ".swiper-wrap .swiper": {
-	    "flexDirection": "column",
-	    "width": "100%",
-	    "slideWidth": "100%",
-	    "height": "250px",
-	    "resizeMode": "cover",
-	    "indicatorColor": "rgba(0,0,0,0.2)",
-	    "indicatorSelectedColor": "#FFFF00",
-	    "indicatorSize": "10px",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "swiper-wrap"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "swiper"
-	        }
-	      ]
-	    }
-	  }
-	}
-
-/***/ },
-/* 24 */
-/***/ function(module, exports) {
-
-	module.exports = function(module, exports, $app_require$){'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _system = $app_require$('@app-module/system.fetch');
-	
-	var _system2 = _interopRequireDefault(_system);
-	
-	var _system3 = $app_require$('@app-module/system.network');
-	
-	var _system4 = _interopRequireDefault(_system3);
-	
-	var _system5 = $app_require$('@app-module/system.prompt');
-	
-	var _system6 = _interopRequireDefault(_system5);
-	
-	var _system7 = $app_require$('@app-module/system.webview');
-	
-	var _system8 = _interopRequireDefault(_system7);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-		props: ['banners', "autoPlay", "interval", "indicator"],
-		onReady: function onReady() {},
-		goToBnaner: function goToBnaner(url) {
-			console.log(url);
-			_system8.default.loadUrl({
-				url: url
-			});
-		}
-	};}
-
-/***/ },
-/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(9)
-	var $app_template$ = __webpack_require__(26)
-	var $app_style$ = __webpack_require__(27)
-	var $app_script$ = __webpack_require__(28)
+	__webpack_require__(6)
+	var $app_template$ = __webpack_require__(23)
+	var $app_style$ = __webpack_require__(24)
+	var $app_script$ = __webpack_require__(25)
 	
 	$app_define$('@app-component/tbk-list', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -674,7 +539,7 @@
 
 
 /***/ },
-/* 26 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -845,7 +710,7 @@
 	}
 
 /***/ },
-/* 27 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1420,7 +1285,7 @@
 	}
 
 /***/ },
-/* 28 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1602,7 +1467,146 @@
 	};}
 
 /***/ },
+/* 26 */,
+/* 27 */,
+/* 28 */,
 /* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $app_template$ = __webpack_require__(30)
+	var $app_style$ = __webpack_require__(31)
+	var $app_script$ = __webpack_require__(32)
+	
+	$app_define$('@app-component/banner', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "type": "swiper",
+	  "attr": {
+	    "autoplay": function () {return this.autoPlay},
+	    "interval": function () {return this.interval},
+	    "indicator": function () {return this.indicator}
+	  },
+	  "classList": [
+	    "swiper"
+	  ],
+	  "children": [
+	    {
+	      "type": "block",
+	      "attr": {},
+	      "repeat": function () {return this.banners},
+	      "children": [
+	        {
+	          "type": "image",
+	          "attr": {
+	            "src": function () {return this.$item.imageUrl}
+	          },
+	          "classList": [
+	            "banners"
+	          ],
+	          "events": {
+	            "click": function (evt) {this.goToBnaner(this.$item.redirectUrl,evt)}
+	          }
+	        }
+	      ]
+	    }
+	  ]
+	}
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  ".swiper-wrap": {
+	    "paddingTop": "30px",
+	    "paddingBottom": "30px"
+	  },
+	  ".swiper-wrap .swiper": {
+	    "flexDirection": "column",
+	    "width": "100%",
+	    "slideWidth": "100%",
+	    "height": "250px",
+	    "resizeMode": "cover",
+	    "indicatorColor": "rgba(0,0,0,0.2)",
+	    "indicatorSelectedColor": "#FFFF00",
+	    "indicatorSize": "10px",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "swiper-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "swiper"
+	        }
+	      ]
+	    }
+	  }
+	}
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	module.exports = function(module, exports, $app_require$){'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _system = $app_require$('@app-module/system.fetch');
+	
+	var _system2 = _interopRequireDefault(_system);
+	
+	var _system3 = $app_require$('@app-module/system.network');
+	
+	var _system4 = _interopRequireDefault(_system3);
+	
+	var _system5 = $app_require$('@app-module/system.prompt');
+	
+	var _system6 = _interopRequireDefault(_system5);
+	
+	var _system7 = $app_require$('@app-module/system.webview');
+	
+	var _system8 = _interopRequireDefault(_system7);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+		props: ['banners', "autoPlay", "interval", "indicator"],
+		onReady: function onReady() {},
+		goToBnaner: function goToBnaner(url) {
+			console.log(url);
+			_system8.default.loadUrl({
+				url: url
+			});
+		}
+	};}
+
+/***/ },
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1780,7 +1784,7 @@
 	}
 
 /***/ },
-/* 30 */
+/* 34 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1998,7 +2002,7 @@
 	}
 
 /***/ },
-/* 31 */
+/* 35 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';

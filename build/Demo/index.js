@@ -48,10 +48,10 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(32)
-	var $app_template$ = __webpack_require__(4)
-	var $app_style$ = __webpack_require__(5)
-	var $app_script$ = __webpack_require__(6)
+	__webpack_require__(37)
+	var $app_template$ = __webpack_require__(1)
+	var $app_style$ = __webpack_require__(40)
+	var $app_script$ = __webpack_require__(3)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -67,49 +67,7 @@
 
 /***/ },
 
-/***/ 2:
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "type": "div",
-	  "attr": {},
-	  "classList": [
-	    "box"
-	  ],
-	  "children": [
-	    {
-	      "type": "text",
-	      "attr": {
-	        "value": "你好吗12313"
-	      },
-	      "events": {
-	        "click": "pess"
-	      }
-	    }
-	  ]
-	}
-
-/***/ },
-
-/***/ 3:
-/***/ function(module, exports) {
-
-	module.exports = function(module, exports, $app_require$){'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = {
-		onInit: function onInit() {},
-		pess: function pess() {
-			console.log(1212);
-			this.$emit('wukai', { name: 'wukai' });
-		}
-	};}
-
-/***/ },
-
-/***/ 4:
+/***/ 1:
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -165,24 +123,7 @@
 
 /***/ },
 
-/***/ 5:
-/***/ function(module, exports) {
-
-	module.exports = {
-	  ".container": {
-	    "flexDirection": "column",
-	    "justifyContent": "center",
-	    "alignItems": "center"
-	  },
-	  ".title": {
-	    "fontSize": "40px",
-	    "textAlign": "center"
-	  }
-	}
-
-/***/ },
-
-/***/ 6:
+/***/ 3:
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -213,11 +154,11 @@
 
 /***/ },
 
-/***/ 32:
+/***/ 37:
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(2)
-	var $app_script$ = __webpack_require__(3)
+	var $app_template$ = __webpack_require__(38)
+	var $app_script$ = __webpack_require__(39)
 	
 	$app_define$('@app-component/port1', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -227,6 +168,65 @@
 	     $app_module$.exports.template = $app_template$
 	})
 
+
+/***/ },
+
+/***/ 38:
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "type": "div",
+	  "attr": {},
+	  "classList": [
+	    "box"
+	  ],
+	  "children": [
+	    {
+	      "type": "text",
+	      "attr": {
+	        "value": "你好吗12313"
+	      },
+	      "events": {
+	        "click": "pess"
+	      }
+	    }
+	  ]
+	}
+
+/***/ },
+
+/***/ 39:
+/***/ function(module, exports) {
+
+	module.exports = function(module, exports, $app_require$){'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = {
+		onInit: function onInit() {},
+		pess: function pess() {
+			console.log(1212);
+			this.$emit('wukai', { name: 'wukai' });
+		}
+	};}
+
+/***/ },
+
+/***/ 40:
+/***/ function(module, exports) {
+
+	module.exports = {
+	  ".container": {
+	    "flexDirection": "column",
+	    "justifyContent": "center",
+	    "alignItems": "center"
+	  },
+	  ".title": {
+	    "fontSize": "40px",
+	    "textAlign": "center"
+	  }
+	}
 
 /***/ }
 
