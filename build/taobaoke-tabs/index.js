@@ -47,11 +47,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(36)
+	__webpack_require__(10)
 	__webpack_require__(18)
-	var $app_template$ = __webpack_require__(26)
-	var $app_style$ = __webpack_require__(27)
-	var $app_script$ = __webpack_require__(28)
+	var $app_template$ = __webpack_require__(22)
+	var $app_style$ = __webpack_require__(23)
+	var $app_script$ = __webpack_require__(24)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -191,7 +191,24 @@
 	};}
 
 /***/ },
-/* 10 */,
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $app_template$ = __webpack_require__(11)
+	var $app_style$ = __webpack_require__(12)
+	var $app_script$ = __webpack_require__(13)
+	
+	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
+
+/***/ },
 /* 11 */
 /***/ function(module, exports) {
 
@@ -278,7 +295,7 @@
 	    "position": "fixed",
 	    "bottom": "0px",
 	    "flexDirection": "row",
-	    "backgroundColor": "#ffffff",
+	    "backgroundColor": "#FFFFFF",
 	    "borderTopWidth": "1px",
 	    "borderTopColor": "#eeeeee",
 	    "borderRightColor": "#eeeeee",
@@ -466,11 +483,11 @@
 			footerList: [{
 				img: ['../common/img/btn_home_normal@2x.png', '../common/img/btn_home_selected@2x.png'],
 				pages: '首页',
-				route: 'javascript:;'
+				route: 'taobaoke'
 			}, {
 				img: ['../common/img/tegong@2x.png', '../common/img/tegongSelected@2x.png'],
 				pages: '特工',
-				route: 'taobaoke'
+				route: 'taobaoke-tabs'
 			}, {
 				img: ['../common/img/btn_chat_normal@2x.png', '../common/img/btn_chat_selected@2x.png'],
 				pages: '资讯',
@@ -482,14 +499,17 @@
 			}]
 		},
 		routes: function routes(item, index) {
-			console.log(this.active, index);
 			if (this.active == index) {
 				return;
 			}
+	
 			_system2.default.replace({
 				uri: item.route,
 				params: { current: index }
 			});
+		},
+		onReady: function onReady() {
+			console.log(this.active, 9999999);
 		}
 	};}
 
@@ -530,21 +550,20 @@
 	        "id": "listdata",
 	        "scrollpage": function () {return this.scrollPage}
 	      },
+	      "repeat": function () {return this.channelArr},
 	      "id": "listdata",
 	      "events": {
-	        "scrollbottom": "getDateList",
-	        "scroll": "scroll"
+	        "scrollbottom": "getDateList"
 	      },
 	      "classList": function () {return ['datalist', this.isShow?'padbot':'']},
 	      "children": [
 	        {
 	          "type": "list-item",
 	          "attr": {
-	            "type": "list-data",
-	            "show": "(channels in listDatas) ? true : false"
+	            "type": "list-data"
 	          },
 	          "repeat": {
-	            "exp": function () {return this.listDatas[this.channels]},
+	            "exp": function () {return this.listDatas[this.$item.channel]},
 	            "value": "item"
 	          },
 	          "classList": [
@@ -672,6 +691,9 @@
 	          "attr": {
 	            "type": "bottom-loading"
 	          },
+	          "classList": [
+	            "bottom-loading"
+	          ],
 	          "children": [
 	            {
 	              "type": "bottom-loading",
@@ -696,9 +718,9 @@
 	    "paddingTop": "100px"
 	  },
 	  ".datalist": {
-	    "flex": 1,
 	    "paddingLeft": "30px",
 	    "paddingRight": "30px",
+	    "paddingTop": "100px",
 	    "paddingBottom": "100px"
 	  },
 	  ".datalist .wrap-list": {
@@ -1294,28 +1316,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-		props: {
-			listDatas: {
-				type: Object,
-				default: {}
-			},
-			channelArr: {
-				type: Array,
-				default: []
-			},
-			curIndex: {
-				type: Number,
-				default: 0
-			},
-			isShow: {
-				type: Boolean,
-				default: false
-			},
-			scrollPage: {
-				type: Boolean,
-				default: true
-			}
-		},
+		props: ['listDatas', 'channelArr', 'curIndex', 'isShow', 'scrollPage'],
 		data: function data() {
 			return {
 				listData: {},
@@ -1327,7 +1328,8 @@
 				isNextLoad: [],
 				page: [],
 				pageSize: 20,
-				channels: ''
+				channels: '',
+				arrayIsNum: [0]
 			};
 		},
 		onInit: function onInit() {
@@ -1348,27 +1350,27 @@
 			this.channels = this.channelArr[this.curIndex].channel;
 			this.getDateList();
 		},
-		selectChannel: function selectChannel() {
+		selectChannel: function selectChannel(newInedx) {
 			this.channels = this.channelArr[this.curIndex].channel;
 	
 			if (this.channels in this.listData) {
 				this.noDataStr = this.noData[this.curIndex];
 				this.loadingStr = this.loading[this.curIndex];
 	
-				this.listData[this.channels] = this.listData[this.channels].slice(0, 20);
-	
-				this.$emit('channeldata', this.listData);
-	
 				this.$element('listdata').scrollTo({ index: 0, smooth: true });
-	
-				this.initialState(2);
 			} else {
-				this.initialState(1);
+				this.initialState();
 				this.getDateList();
 			}
 		},
-		initialState: function initialState(page) {
-			this.page[this.curIndex] = page;
+		_isNum: function _isNum(index) {
+			var num = this.arrayIsNum.findIndex(function (item) {
+				return index === item;
+			});
+			return num;
+		},
+		initialState: function initialState() {
+			this.page[this.curIndex] = 1;
 			this.loading[this.curIndex] = true;
 			this.loadingStr = this.loading[this.curIndex];
 			this.noData[this.curIndex] = false;
@@ -1398,9 +1400,7 @@
 		getTaoBaoKe: function getTaoBaoKe(isRefresh) {
 			var self = this;
 			self.channels = self.channelArr[self.curIndex].channel;
-			console.log(self.page[self.curIndex], 1);
 	
-			console.log(self.channels, 3);
 			_system2.default.fetch({
 				url: 'https://jz-c.doumi.com/api/v3/client/tbk/lists',
 				data: {
@@ -1458,17 +1458,13 @@
 	};}
 
 /***/ },
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "stack",
+	  "type": "layered",
 	  "attr": {
-	    "active": function () {return this.current},
+	    "active": function () {return this.current||0},
 	    "id": "container"
 	  },
 	  "id": "container",
@@ -1482,8 +1478,7 @@
 	        "index": function () {return this.curIndex}
 	      },
 	      "classList": [
-	        "tabs-wrap",
-	        "slot-wrap"
+	        "tabs-wrap"
 	      ],
 	      "events": {
 	        "change": "changeIndex"
@@ -1531,7 +1526,7 @@
 	        {
 	          "type": "contents",
 	          "attr": {
-	            "scrollPage": function () {return this.scrollPage},
+	            "scrollPage": function () {return this.scrollPage||true},
 	            "listDatas": function () {return this.listData},
 	            "curIndex": function () {return this.curIndex},
 	            "channelArr": function () {return this.channels}
@@ -1546,13 +1541,14 @@
 	}
 
 /***/ },
-/* 27 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = {
 	  ".tabs-wrap": {
-	    "paddingTop": "100px",
-	    "height": "100%"
+	    "backgroundColor": "#ffffff",
+	    "height": "100%",
+	    "flexDirection": "column"
 	  },
 	  ".tabs-wrap .tabs-item": {
 	    "flexDirection": "row",
@@ -1764,7 +1760,7 @@
 	}
 
 /***/ },
-/* 28 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1807,8 +1803,7 @@
 			isShow: false,
 			appearCount: 0,
 			curIndex: 0,
-			listData: {},
-			scrollPage: true
+			listData: {}
 		},
 		onInit: function onInit() {
 			var self = this;
@@ -1897,35 +1892,9 @@
 			});
 		},
 		changeIndex: function changeIndex(e) {
-			console.log('测试点击tabs 的onchange事件无响应');
 			this.curIndex = e.index;
 		}
 	};}
-
-/***/ },
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(11)
-	var $app_style$ = __webpack_require__(12)
-	var $app_script$ = __webpack_require__(13)
-	
-	$app_define$('@app-component/stack', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	     $app_module$.exports.style = $app_style$
-	})
-
 
 /***/ }
 /******/ ]);

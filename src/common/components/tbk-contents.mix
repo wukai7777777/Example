@@ -1,13 +1,13 @@
 <import src="./bottom-loading.mix" name="bottom-loading"></import>
 <template>
 	<tab-content>
-		<list id="listdata" onscrollBottom="getDateList" scrollpage="{{scrollPage}}" class="datalist {{isShow ? 'padbot' : ''}}" onscroll="scroll">
+		<list for="{{channelArr}}" id="listdata" onscrollBottom="getDateList" scrollpage="{{scrollPage}}" class="datalist {{isShow ? 'padbot' : ''}}">
 			<!-- <list-item type="ceshi">
 				<text class="" style="background-color: red">
 					{{scrollPage}}
 				</text>
 			</list-item> -->
-				<list-item for="{{item in listDatas[channels]}}" type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
+				<list-item for="{{item in listDatas[$item.channel]}}" type="list-data" class="wrap-list" onclick="goTodetail()">
 					<image class="product-image" src="{{item.pict_url}}"></image>
 					<div class="message-wrap">
 						<div class="msg-left">
@@ -28,8 +28,7 @@
 					</div>
 				</list-item>
 
-
-			<list-item type="bottom-loading">
+			<list-item type="bottom-loading" class="bottom-loading">
 	            <bottom-loading :loading="{{loadingStr}}" :no-data="{{noDataStr}}"></bottom-loading>
 	        </list-item>
 		</list>
@@ -42,29 +41,29 @@
 	import prompt from '@system.prompt'
 	import webview from '@system.webview'
 	export default{
-		//props:['listDatas', 'channelArr', 'curIndex'],
-		props: {
-			listDatas: {
-				type: Object,
-				default: {}
-			},
-			channelArr: {
-				type: Array,
-				default: []
-			},
-			curIndex: {
-				type: Number,
-				default: 0
-			},
-			isShow: {
-				type: Boolean,
-				default: false
-			},
-			scrollPage: {
-				type: Boolean,
-				default: true
-			}
-		},
+		props:['listDatas', 'channelArr', 'curIndex', 'isShow', 'scrollPage'],
+		// props: {
+		// 	listDatas: {
+		// 		type: Object,
+		// 		default: {}
+		// 	},
+		// 	channelArr: {
+		// 		type: Array,
+		// 		default: []
+		// 	},
+		// 	curIndex: {
+		// 		type: Number,
+		// 		default: 0
+		// 	},
+		// 	isShow: {
+		// 		type: Boolean,
+		// 		default: false
+		// 	},
+		// 	scrollPage: {
+		// 		type: Boolean,
+		// 		default: true
+		// 	}
+		// },
 		data(){
 			return {
 				listData: {},
@@ -77,6 +76,7 @@
 				page: [],
 				pageSize: 20,
 				channels: '',
+				arrayIsNum: [0]
 			}
 		},
 		onInit() {
@@ -101,31 +101,48 @@
 			this.channels = this.channelArr[this.curIndex].channel
 			this.getDateList();
 		},
-		selectChannel() {
-			//每次点击tab时动态获取channels
+		selectChannel(newInedx) {
+			// console.log(newInedx,'newInedx')
+			// console.log(this._isNum(newInedx))
+			// if(this._isNum(newInedx) === -1) { //首次切换
+			// 	console.log(1111)
+			// 	this.arrayIsNum.push(newInedx)
+			// 	//第一次点击tab时动态获取channels
+			// 	this.channels = this.channelArr[this.curIndex].channel
+			// 	this.initialState()
+			// 	this.getDateList();
+			// }else{
+			// 	console.log(2222)
+			// 	//切换获取底部状态
+			// 	this.noDataStr = this.noData[this.curIndex]
+			// 	this.loadingStr = this.loading[this.curIndex]
+			// 	//点击滚动到顶部
+			// 	this.$element('listdata').scrollTo({index: 0, smooth: true})
+			// }
+			
+			//第一次点击tab时动态获取channels
 			this.channels = this.channelArr[this.curIndex].channel
-			//console.log(this.channels)
 			//已经点击过channels
 			if(this.channels in this.listData){//非首次
 				//切换获取底部状态
 				this.noDataStr = this.noData[this.curIndex]
 				this.loadingStr = this.loading[this.curIndex]
-				//将下拉的多页数据截取为一页数据
-				this.listData[this.channels] = this.listData[this.channels].slice(0, 20)
-				//回传到父组件
-		        this.$emit('channeldata', this.listData)
 		        //点击滚动到顶部
 				this.$element('listdata').scrollTo({index: 0, smooth: true})
-		        //设置对应channels加载第二页状态
-		        this.initialState(2)
 			}else{ //第一次点击channel
 				//当第一次点击对应channel初始化各种状态
-				this.initialState(1)
+				this.initialState()
 				this.getDateList();
 			}
 		},
-		initialState(page) {
-			this.page[this.curIndex] = page;
+		_isNum(index) {
+			let num = this.arrayIsNum.findIndex((item) => {
+				return index === item
+			})
+			return num
+		},
+		initialState() {
+			this.page[this.curIndex] = 1;
 			this.loading[this.curIndex] = true;
 			this.loadingStr = this.loading[this.curIndex];
 			this.noData[this.curIndex] = false;
@@ -155,9 +172,9 @@
 		getTaoBaoKe(isRefresh) {
 			let self = this;
 			self.channels = self.channelArr[self.curIndex].channel;
-			console.log(self.page[self.curIndex], 1)
+			//console.log(self.page[self.curIndex], 1)
 			//console.log(self.pageSize, 2)
-			console.log(self.channels, 3)
+			//console.log(self.channels, 3)
 			fetch.fetch({ 
 	          url: 'https://jz-c.doumi.com/api/v3/client/tbk/lists',
 	          data: {
@@ -226,15 +243,14 @@
 		}
 	}
 </script>
-
 <style lang="less">
 .padbot{
 	padding-top: 100px;
 }
 .datalist{
-	flex: 1;
 	padding-left:30px;
 	padding-right:30px;
+	padding-top: 100px;
 	padding-bottom: 100px;
 	.wrap-list{
 		padding-top: 20px;

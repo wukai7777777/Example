@@ -48,7 +48,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(6)
-	__webpack_require__(36)
+	__webpack_require__(10)
 	var $app_template$ = __webpack_require__(14)
 	var $app_style$ = __webpack_require__(15)
 	var $app_script$ = __webpack_require__(16)
@@ -191,7 +191,24 @@
 	};}
 
 /***/ },
-/* 10 */,
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $app_template$ = __webpack_require__(11)
+	var $app_style$ = __webpack_require__(12)
+	var $app_script$ = __webpack_require__(13)
+	
+	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
+
+/***/ },
 /* 11 */
 /***/ function(module, exports) {
 
@@ -278,7 +295,7 @@
 	    "position": "fixed",
 	    "bottom": "0px",
 	    "flexDirection": "row",
-	    "backgroundColor": "#ffffff",
+	    "backgroundColor": "#FFFFFF",
 	    "borderTopWidth": "1px",
 	    "borderTopColor": "#eeeeee",
 	    "borderRightColor": "#eeeeee",
@@ -466,11 +483,11 @@
 			footerList: [{
 				img: ['../common/img/btn_home_normal@2x.png', '../common/img/btn_home_selected@2x.png'],
 				pages: '首页',
-				route: 'javascript:;'
+				route: 'taobaoke'
 			}, {
 				img: ['../common/img/tegong@2x.png', '../common/img/tegongSelected@2x.png'],
 				pages: '特工',
-				route: 'taobaoke'
+				route: 'taobaoke-tabs'
 			}, {
 				img: ['../common/img/btn_chat_normal@2x.png', '../common/img/btn_chat_selected@2x.png'],
 				pages: '资讯',
@@ -482,14 +499,17 @@
 			}]
 		},
 		routes: function routes(item, index) {
-			console.log(this.active, index);
 			if (this.active == index) {
 				return;
 			}
+	
 			_system2.default.replace({
 				uri: item.route,
 				params: { current: index }
 			});
+		},
+		onReady: function onReady() {
+			console.log(this.active, 9999999);
 		}
 	};}
 
@@ -498,7 +518,7 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "stack",
+	  "type": "layered",
 	  "attr": {
 	    "active": function () {return this.current}
 	  },
@@ -1786,42 +1806,6 @@
 	};
 	
 	exports.default = util;
-
-/***/ },
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(11)
-	var $app_style$ = __webpack_require__(12)
-	var $app_script$ = __webpack_require__(13)
-	
-	$app_define$('@app-component/stack', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	     $app_module$.exports.style = $app_style$
-	})
-
 
 /***/ }
 /******/ ]);

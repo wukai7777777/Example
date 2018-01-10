@@ -3,7 +3,7 @@
 	<list id="listdata" onscrollBottom="getDateList" scrollpage="{{scrollPage}}" class="datalist {{isShow ? 'padbot' : ''}}" onscroll="scroll">
 		<!-- <list-item type="ceshi">
 			<text class="" style="background-color: red">
-				{{scrollPage}}
+				{{scrollPage}}11
 			</text>
 		</list-item> -->
 			<list-item for="{{item in listDatas[channels]}}" type="list-data" class="wrap-list" show="(channels in listDatas) ? true : false" onclick="goTodetail()">
@@ -26,8 +26,6 @@
 					</div>
 				</div>
 			</list-item>
-
-
 		<list-item type="bottom-loading">
             <bottom-loading :loading="{{loadingStr}}" :no-data="{{noDataStr}}"></bottom-loading>
         </list-item>
@@ -40,29 +38,29 @@
 	import prompt from '@system.prompt'
 	import webview from '@system.webview'
 	export default{
-		//props:['listDatas', 'channelArr', 'curIndex'],
-		props: {
-			listDatas: {
-				type: Object,
-				default: {}
-			},
-			channelArr: {
-				type: Array,
-				default: []
-			},
-			curIndex: {
-				type: Number,
-				default: 0
-			},
-			isShow: {
-				type: Boolean,
-				default: false
-			},
-			scrollPage: {
-				type: Boolean,
-				default: true
-			}
-		},
+		props:['listDatas', 'channelArr', 'curIndex', 'isShow', 'scrollPage'],
+		// props: {
+		// 	listDatas: {
+		// 		type: Object,
+		// 		default: {}
+		// 	},
+		// 	channelArr: {
+		// 		type: Array,
+		// 		default: []
+		// 	},
+		// 	curIndex: {
+		// 		type: Number,
+		// 		default: 0
+		// 	},
+		// 	isShow: {
+		// 		type: Boolean,
+		// 		default: false
+		// 	},
+		// 	scrollPage: {
+		// 		type: Boolean,
+		// 		default: true
+		// 	}
+		// },
 		data(){
 			return {
 				listData: {},

@@ -1,14 +1,13 @@
 
 <!-- <import src="../common/components/swiper.mix" name="banner"></import> -->
-<import src="../common/components/stack.mix" name="stack"></import>
+<import src="../common/components/layered.mix" name="layered"></import>
 <import src="../common/components/tbk-contents.mix" name="contents"></import>
 <template>
 	<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
-		<stack active="{{current}}" id="container" class="container">
+		<layered active="{{current || 0}}" id="container" class="container">
 				<!-- <div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
 					<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
 				</div> -->
-
 				
 				<!-- <div class="tabs-wrap" show="{{channels.length>0}}" ondisappear="showMask" onappear="hideMask">
 					<tabs onchange="changeIndex" index="{{curIndex}}">
@@ -21,18 +20,18 @@
 					</tabs>
 				</div> -->
 
-				<tabs class="tabs-wrap slot-wrap" onchange="changeIndex" index="{{curIndex}}">
+				<tabs class="tabs-wrap" onchange="changeIndex" index="{{curIndex}}">
 					<tab-bar mode="scrollable" class="tabs-item">
 						<div class="channels" for="{{(index, item) in channels}}">
 							<text class="text">{{item.text}}</text>
 							<div class="line {{index == curIndex ? 'active' : ''}}"></div>
 						</div>
 					</tab-bar>
-					<contents scroll-page="{{scrollPage}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></contents>
+					<contents scroll-page="{{scrollPage || true}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></contents>
 				</tabs>
 
 				<!-- <tbk-list scroll-page="{{scrollPage}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list> -->
-		</stack>
+		</layered>
 	<!-- </refresh> -->
 </template>
 
@@ -44,9 +43,7 @@
 	import app from '@system.app'
 
 	export default {
-		props: [
-			'current'
-		],
+		props: ['current'],
 		data: {
 			bannerData: [],
 			channels: [],
@@ -58,7 +55,7 @@
 			appearCount: 0,
 			curIndex: 0,
 			listData: {},
-			scrollPage: true
+			//scrollPage: true
 		},
 		onInit() {
 			let self = this
@@ -163,7 +160,6 @@
 			})
 		},
 		changeIndex(e) {
-			console.log('测试点击tabs 的onchange事件无响应');
 			this.curIndex = e.index;
 		}
 	}
@@ -172,9 +168,9 @@
 
 <style lang="less">
 	.tabs-wrap{
-		padding-top: 100px;
-		background-color: ＃ffffff;
+		background-color: #ffffff;
 		height: 100%;
+		flex-direction: column;
 		.tabs-item{
 			flex-direction: row;
 			flex: 1;

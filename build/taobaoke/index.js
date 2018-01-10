@@ -47,9 +47,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(29)
+	__webpack_require__(25)
 	__webpack_require__(10)
-	__webpack_require__(22)
+	__webpack_require__(29)
 	var $app_template$ = __webpack_require__(33)
 	var $app_style$ = __webpack_require__(34)
 	var $app_script$ = __webpack_require__(35)
@@ -296,7 +296,7 @@
 	    "position": "fixed",
 	    "bottom": "0px",
 	    "flexDirection": "row",
-	    "backgroundColor": "#ffffff",
+	    "backgroundColor": "#FFFFFF",
 	    "borderTopWidth": "1px",
 	    "borderTopColor": "#eeeeee",
 	    "borderRightColor": "#eeeeee",
@@ -484,11 +484,11 @@
 			footerList: [{
 				img: ['../common/img/btn_home_normal@2x.png', '../common/img/btn_home_selected@2x.png'],
 				pages: '首页',
-				route: 'javascript:;'
+				route: 'taobaoke'
 			}, {
 				img: ['../common/img/tegong@2x.png', '../common/img/tegongSelected@2x.png'],
 				pages: '特工',
-				route: 'taobaoke'
+				route: 'taobaoke-tabs'
 			}, {
 				img: ['../common/img/btn_chat_normal@2x.png', '../common/img/btn_chat_selected@2x.png'],
 				pages: '资讯',
@@ -500,14 +500,17 @@
 			}]
 		},
 		routes: function routes(item, index) {
-			console.log(this.active, index);
 			if (this.active == index) {
 				return;
 			}
+	
 			_system2.default.replace({
 				uri: item.route,
 				params: { current: index }
 			});
+		},
+		onReady: function onReady() {
+			console.log(this.active, 9999999);
 		}
 	};}
 
@@ -520,13 +523,152 @@
 /* 19 */,
 /* 20 */,
 /* 21 */,
-/* 22 */
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $app_template$ = __webpack_require__(26)
+	var $app_style$ = __webpack_require__(27)
+	var $app_script$ = __webpack_require__(28)
+	
+	$app_define$('@app-component/banner', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "type": "swiper",
+	  "attr": {
+	    "autoplay": function () {return this.autoPlay},
+	    "interval": function () {return this.interval},
+	    "indicator": function () {return this.indicator}
+	  },
+	  "classList": [
+	    "swiper"
+	  ],
+	  "children": [
+	    {
+	      "type": "block",
+	      "attr": {},
+	      "repeat": function () {return this.banners},
+	      "children": [
+	        {
+	          "type": "image",
+	          "attr": {
+	            "src": function () {return this.$item.imageUrl}
+	          },
+	          "classList": [
+	            "banners"
+	          ],
+	          "events": {
+	            "click": function (evt) {this.goToBnaner(this.$item.redirectUrl,evt)}
+	          }
+	        }
+	      ]
+	    }
+	  ]
+	}
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  ".swiper-wrap": {
+	    "paddingTop": "30px",
+	    "paddingBottom": "30px"
+	  },
+	  ".swiper-wrap .swiper": {
+	    "flexDirection": "column",
+	    "width": "100%",
+	    "slideWidth": "100%",
+	    "height": "250px",
+	    "resizeMode": "cover",
+	    "indicatorColor": "rgba(0,0,0,0.2)",
+	    "indicatorSelectedColor": "#FFFF00",
+	    "indicatorSize": "10px",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "swiper-wrap"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "swiper"
+	        }
+	      ]
+	    }
+	  }
+	}
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = function(module, exports, $app_require$){'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _system = $app_require$('@app-module/system.fetch');
+	
+	var _system2 = _interopRequireDefault(_system);
+	
+	var _system3 = $app_require$('@app-module/system.network');
+	
+	var _system4 = _interopRequireDefault(_system3);
+	
+	var _system5 = $app_require$('@app-module/system.prompt');
+	
+	var _system6 = _interopRequireDefault(_system5);
+	
+	var _system7 = $app_require$('@app-module/system.webview');
+	
+	var _system8 = _interopRequireDefault(_system7);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+		props: ['banners', "autoPlay", "interval", "indicator"],
+		onReady: function onReady() {},
+		goToBnaner: function goToBnaner(url) {
+			console.log(url);
+			_system8.default.loadUrl({
+				url: url
+			});
+		}
+	};}
+
+/***/ },
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(6)
-	var $app_template$ = __webpack_require__(23)
-	var $app_style$ = __webpack_require__(24)
-	var $app_script$ = __webpack_require__(25)
+	var $app_template$ = __webpack_require__(30)
+	var $app_style$ = __webpack_require__(31)
+	var $app_script$ = __webpack_require__(32)
 	
 	$app_define$('@app-component/tbk-list', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -539,7 +681,7 @@
 
 
 /***/ },
-/* 23 */
+/* 30 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -704,7 +846,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1282,7 +1424,7 @@
 	}
 
 /***/ },
-/* 25 */
+/* 32 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1310,28 +1452,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-		props: {
-			listDatas: {
-				type: Object,
-				default: {}
-			},
-			channelArr: {
-				type: Array,
-				default: []
-			},
-			curIndex: {
-				type: Number,
-				default: 0
-			},
-			isShow: {
-				type: Boolean,
-				default: false
-			},
-			scrollPage: {
-				type: Boolean,
-				default: true
-			}
-		},
+		props: ['listDatas', 'channelArr', 'curIndex', 'isShow', 'scrollPage'],
 		data: function data() {
 			return {
 				listData: {},
@@ -1474,152 +1595,13 @@
 	};}
 
 /***/ },
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(30)
-	var $app_style$ = __webpack_require__(31)
-	var $app_script$ = __webpack_require__(32)
-	
-	$app_define$('@app-component/banner', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	     $app_module$.exports.style = $app_style$
-	})
-
-
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "type": "swiper",
-	  "attr": {
-	    "autoplay": function () {return this.autoPlay},
-	    "interval": function () {return this.interval},
-	    "indicator": function () {return this.indicator}
-	  },
-	  "classList": [
-	    "swiper"
-	  ],
-	  "children": [
-	    {
-	      "type": "block",
-	      "attr": {},
-	      "repeat": function () {return this.banners},
-	      "children": [
-	        {
-	          "type": "image",
-	          "attr": {
-	            "src": function () {return this.$item.imageUrl}
-	          },
-	          "classList": [
-	            "banners"
-	          ],
-	          "events": {
-	            "click": function (evt) {this.goToBnaner(this.$item.redirectUrl,evt)}
-	          }
-	        }
-	      ]
-	    }
-	  ]
-	}
-
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  ".swiper-wrap": {
-	    "paddingTop": "30px",
-	    "paddingBottom": "30px"
-	  },
-	  ".swiper-wrap .swiper": {
-	    "flexDirection": "column",
-	    "width": "100%",
-	    "slideWidth": "100%",
-	    "height": "250px",
-	    "resizeMode": "cover",
-	    "indicatorColor": "rgba(0,0,0,0.2)",
-	    "indicatorSelectedColor": "#FFFF00",
-	    "indicatorSize": "10px",
-	    "_meta": {
-	      "ruleDef": [
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "swiper-wrap"
-	        },
-	        {
-	          "t": "d"
-	        },
-	        {
-	          "t": "a",
-	          "n": "class",
-	          "i": false,
-	          "a": "element",
-	          "v": "swiper"
-	        }
-	      ]
-	    }
-	  }
-	}
-
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	module.exports = function(module, exports, $app_require$){'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _system = $app_require$('@app-module/system.fetch');
-	
-	var _system2 = _interopRequireDefault(_system);
-	
-	var _system3 = $app_require$('@app-module/system.network');
-	
-	var _system4 = _interopRequireDefault(_system3);
-	
-	var _system5 = $app_require$('@app-module/system.prompt');
-	
-	var _system6 = _interopRequireDefault(_system5);
-	
-	var _system7 = $app_require$('@app-module/system.webview');
-	
-	var _system8 = _interopRequireDefault(_system7);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-		props: ['banners', "autoPlay", "interval", "indicator"],
-		onReady: function onReady() {},
-		goToBnaner: function goToBnaner(url) {
-			console.log(url);
-			_system8.default.loadUrl({
-				url: url
-			});
-		}
-	};}
-
-/***/ },
 /* 33 */
 /***/ function(module, exports) {
 
 	module.exports = {
 	  "type": "layered",
 	  "attr": {
-	    "active": function () {return this.current},
+	    "active": function () {return this.current||0},
 	    "id": "container"
 	  },
 	  "id": "container",
@@ -1719,6 +1701,7 @@
 	        {
 	          "type": "tbk-list",
 	          "attr": {
+	            "scrollPage": function () {return this.scrollPage||true},
 	            "isShow": function () {return this.isShow},
 	            "listDatas": function () {return this.listData},
 	            "curIndex": function () {return this.curIndex},
@@ -2059,7 +2042,8 @@
 			isShow: false,
 			appearCount: 0,
 			curIndex: 0,
-			listData: {}
+			listData: {},
+			scrollPage: true
 		},
 		onInit: function onInit() {
 			var self = this;
