@@ -1,7 +1,7 @@
 	<import src="../common/components/bottom-loading.mix" name="bottom-loading"></import>
-	<import src="../common/components/stack.mix" name="layered"></import>
+	<import src="../common/components/stack.mix" name="stack"></import>
 	<template>
-		<layered active="{{current}}">
+		<stack active="{{current}}">
 			<list onscrollBottom="getMsglist" class="msg-list">
 				<block for="{{item in datalist}}" if="item.data.data.length != 0">
 					<list-item class="mod-list-item" type="{{(item.data.templateType == 2) ? 'mod-list-item' : 'mod-list-item1'}}">
@@ -36,7 +36,7 @@
 					<bottom-loading loading="{{loading}}" no-data="{{noData}}"></bottom-loading>
 				</list-item>
 			</list>
-		</layered>
+		</stack>
 	</template>
 
 	<style lang="less">

@@ -47,7 +47,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(10)
+	__webpack_require__(36)
 	__webpack_require__(18)
 	var $app_template$ = __webpack_require__(26)
 	var $app_style$ = __webpack_require__(27)
@@ -191,24 +191,7 @@
 	};}
 
 /***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $app_template$ = __webpack_require__(11)
-	var $app_style$ = __webpack_require__(12)
-	var $app_script$ = __webpack_require__(13)
-	
-	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
-	     $app_script$($app_module$, $app_exports$, $app_require$)
-	     if ($app_exports$.__esModule && $app_exports$.default) {
-	            $app_module$.exports = $app_exports$.default
-	        }
-	     $app_module$.exports.template = $app_template$
-	     $app_module$.exports.style = $app_style$
-	})
-
-
-/***/ },
+/* 10 */,
 /* 11 */
 /***/ function(module, exports) {
 
@@ -1483,12 +1466,15 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "layered",
+	  "type": "stack",
 	  "attr": {
 	    "active": function () {return this.current},
 	    "id": "container"
 	  },
 	  "id": "container",
+	  "classList": [
+	    "container"
+	  ],
 	  "children": [
 	    {
 	      "type": "tabs",
@@ -1499,9 +1485,6 @@
 	        "tabs-wrap",
 	        "slot-wrap"
 	      ],
-	      "style": {
-	        "position": "fixed"
-	      },
 	      "events": {
 	        "change": "changeIndex"
 	      },
@@ -1569,7 +1552,7 @@
 	module.exports = {
 	  ".tabs-wrap": {
 	    "paddingTop": "100px",
-	    "backgroundColor": "#ffffff"
+	    "height": "100%"
 	  },
 	  ".tabs-wrap .tabs-item": {
 	    "flexDirection": "row",
@@ -1579,6 +1562,8 @@
 	    "borderRightColor": "#cccccc",
 	    "borderBottomColor": "#cccccc",
 	    "borderLeftColor": "#cccccc",
+	    "position": "fixed",
+	    "top": "0px",
 	    "_meta": {
 	      "ruleDef": [
 	        {
@@ -1916,6 +1901,31 @@
 			this.curIndex = e.index;
 		}
 	};}
+
+/***/ },
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $app_template$ = __webpack_require__(11)
+	var $app_style$ = __webpack_require__(12)
+	var $app_script$ = __webpack_require__(13)
+	
+	$app_define$('@app-component/stack', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
 
 /***/ }
 /******/ ]);

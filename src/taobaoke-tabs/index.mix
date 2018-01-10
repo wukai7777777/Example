@@ -1,10 +1,10 @@
 
 <!-- <import src="../common/components/swiper.mix" name="banner"></import> -->
-<import src="../common/components/stack.mix" name="layered"></import>
+<import src="../common/components/stack.mix" name="stack"></import>
 <import src="../common/components/tbk-contents.mix" name="contents"></import>
 <template>
 	<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
-		<layered active="{{current}}" id="container">
+		<stack active="{{current}}" id="container" class="container">
 				<!-- <div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
 					<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
 				</div> -->
@@ -21,7 +21,7 @@
 					</tabs>
 				</div> -->
 
-				<tabs class="tabs-wrap slot-wrap" style="position:fixed;" onchange="changeIndex" index="{{curIndex}}">
+				<tabs class="tabs-wrap slot-wrap" onchange="changeIndex" index="{{curIndex}}">
 					<tab-bar mode="scrollable" class="tabs-item">
 						<div class="channels" for="{{(index, item) in channels}}">
 							<text class="text">{{item.text}}</text>
@@ -32,7 +32,7 @@
 				</tabs>
 
 				<!-- <tbk-list scroll-page="{{scrollPage}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list> -->
-		</layered>
+		</stack>
 	<!-- </refresh> -->
 </template>
 
@@ -173,12 +173,15 @@
 <style lang="less">
 	.tabs-wrap{
 		padding-top: 100px;
-		background-color: #ffffff;
+		background-color: ＃ffffff;
+		height: 100%;
 		.tabs-item{
 			flex-direction: row;
 			flex: 1;
 			border-bottom-width: 1px ;
 			border-color: #cccccc;
+			position:fixed;
+			top: 0px;
 			.channels{
 				flex: 1;
 				flex-direction: column;

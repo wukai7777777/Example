@@ -5,7 +5,7 @@
 <template>
 	<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
 		<layered active="{{current}}" id="container">
-				<div class="slot-wrap"></div>
+				<div class="slot-wrap">
 					<div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
 						<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
 					</div>

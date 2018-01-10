@@ -1629,160 +1629,162 @@
 	      "attr": {},
 	      "classList": [
 	        "slot-wrap"
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "attr": {
-	        "show": "bannerData.length>0"
-	      },
-	      "classList": [
-	        "swiper-wrap"
-	      ],
-	      "events": {
-	        "disappear": "showMask",
-	        "appear": "hideMask"
-	      },
-	      "children": [
-	        {
-	          "type": "banner",
-	          "attr": {
-	            "banners": function () {return this.bannerData},
-	            "interval": function () {return this.interval},
-	            "autoPlay": function () {return this.autoPlay},
-	            "indicator": function () {return this.indicator}
-	          }
-	        }
-	      ]
-	    },
-	    {
-	      "type": "div",
-	      "attr": {
-	        "show": function () {return this.channels.length>0}
-	      },
-	      "classList": [
-	        "tabs-wrap"
 	      ],
 	      "children": [
 	        {
-	          "type": "tabs",
+	          "type": "div",
 	          "attr": {
-	            "index": function () {return this.curIndex}
+	            "show": "bannerData.length>0"
 	          },
+	          "classList": [
+	            "swiper-wrap"
+	          ],
 	          "events": {
-	            "change": "changeIndex"
+	            "disappear": "showMask",
+	            "appear": "hideMask"
 	          },
 	          "children": [
 	            {
-	              "type": "tab-bar",
+	              "type": "banner",
 	              "attr": {
-	                "mode": "scrollable"
+	                "banners": function () {return this.bannerData},
+	                "interval": function () {return this.interval},
+	                "autoPlay": function () {return this.autoPlay},
+	                "indicator": function () {return this.indicator}
+	              }
+	            }
+	          ]
+	        },
+	        {
+	          "type": "div",
+	          "attr": {
+	            "show": function () {return this.channels.length>0}
+	          },
+	          "classList": [
+	            "tabs-wrap"
+	          ],
+	          "children": [
+	            {
+	              "type": "tabs",
+	              "attr": {
+	                "index": function () {return this.curIndex}
 	              },
-	              "classList": [
-	                "tabs-item"
-	              ],
+	              "events": {
+	                "change": "changeIndex"
+	              },
 	              "children": [
 	                {
-	                  "type": "div",
-	                  "attr": {},
-	                  "classList": [
-	                    "channels"
-	                  ],
-	                  "repeat": {
-	                    "exp": function () {return this.channels},
-	                    "key": "index",
-	                    "value": "item"
+	                  "type": "tab-bar",
+	                  "attr": {
+	                    "mode": "scrollable"
 	                  },
+	                  "classList": [
+	                    "tabs-item"
+	                  ],
 	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.text}
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
 	                    {
 	                      "type": "div",
 	                      "attr": {},
-	                      "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
+	                      "classList": [
+	                        "channels"
+	                      ],
+	                      "repeat": {
+	                        "exp": function () {return this.channels},
+	                        "key": "index",
+	                        "value": "item"
+	                      },
+	                      "children": [
+	                        {
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return this.item.text}
+	                          },
+	                          "classList": [
+	                            "text"
+	                          ]
+	                        },
+	                        {
+	                          "type": "div",
+	                          "attr": {},
+	                          "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
+	                        }
+	                      ]
 	                    }
 	                  ]
 	                }
 	              ]
 	            }
 	          ]
-	        }
-	      ]
-	    },
-	    {
-	      "type": "tbk-list",
-	      "attr": {
-	        "isShow": function () {return this.isShow},
-	        "listDatas": function () {return this.listData},
-	        "curIndex": function () {return this.curIndex},
-	        "channelArr": function () {return this.channels}
-	      },
-	      "events": {
-	        "channeldata": "getListData"
-	      }
-	    },
-	    {
-	      "type": "div",
-	      "attr": {
-	        "show": function () {return this.isShow}
-	      },
-	      "classList": [
-	        "tabs-wrap"
-	      ],
-	      "style": {
-	        "position": "fixed"
-	      },
-	      "children": [
+	        },
 	        {
-	          "type": "tabs",
+	          "type": "tbk-list",
 	          "attr": {
-	            "index": function () {return this.curIndex}
+	            "isShow": function () {return this.isShow},
+	            "listDatas": function () {return this.listData},
+	            "curIndex": function () {return this.curIndex},
+	            "channelArr": function () {return this.channels}
 	          },
 	          "events": {
-	            "change": "changeIndex"
+	            "channeldata": "getListData"
+	          }
+	        },
+	        {
+	          "type": "div",
+	          "attr": {
+	            "show": function () {return this.isShow}
+	          },
+	          "classList": [
+	            "tabs-wrap"
+	          ],
+	          "style": {
+	            "position": "fixed"
 	          },
 	          "children": [
 	            {
-	              "type": "tab-bar",
+	              "type": "tabs",
 	              "attr": {
-	                "mode": "scrollable"
+	                "index": function () {return this.curIndex}
 	              },
-	              "classList": [
-	                "tabs-item"
-	              ],
+	              "events": {
+	                "change": "changeIndex"
+	              },
 	              "children": [
 	                {
-	                  "type": "div",
-	                  "attr": {},
-	                  "classList": [
-	                    "channels"
-	                  ],
-	                  "repeat": {
-	                    "exp": function () {return this.channels},
-	                    "key": "index",
-	                    "value": "item"
+	                  "type": "tab-bar",
+	                  "attr": {
+	                    "mode": "scrollable"
 	                  },
+	                  "classList": [
+	                    "tabs-item"
+	                  ],
 	                  "children": [
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.text}
-	                      },
-	                      "classList": [
-	                        "text"
-	                      ]
-	                    },
 	                    {
 	                      "type": "div",
 	                      "attr": {},
-	                      "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
+	                      "classList": [
+	                        "channels"
+	                      ],
+	                      "repeat": {
+	                        "exp": function () {return this.channels},
+	                        "key": "index",
+	                        "value": "item"
+	                      },
+	                      "children": [
+	                        {
+	                          "type": "text",
+	                          "attr": {
+	                            "value": function () {return this.item.text}
+	                          },
+	                          "classList": [
+	                            "text"
+	                          ]
+	                        },
+	                        {
+	                          "type": "div",
+	                          "attr": {},
+	                          "classList": function () {return ['line', this.index==this.curIndex?'active':'']}
+	                        }
+	                      ]
 	                    }
 	                  ]
 	                }
