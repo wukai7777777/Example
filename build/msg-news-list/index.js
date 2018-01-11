@@ -49,9 +49,9 @@
 
 	__webpack_require__(6)
 	__webpack_require__(10)
-	var $app_template$ = __webpack_require__(14)
-	var $app_style$ = __webpack_require__(15)
-	var $app_script$ = __webpack_require__(16)
+	var $app_template$ = __webpack_require__(18)
+	var $app_style$ = __webpack_require__(19)
+	var $app_script$ = __webpack_require__(20)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -194,9 +194,10 @@
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(11)
-	var $app_style$ = __webpack_require__(12)
-	var $app_script$ = __webpack_require__(13)
+	__webpack_require__(11)
+	var $app_template$ = __webpack_require__(15)
+	var $app_style$ = __webpack_require__(16)
+	var $app_script$ = __webpack_require__(17)
 	
 	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -210,67 +211,75 @@
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $app_template$ = __webpack_require__(12)
+	var $app_style$ = __webpack_require__(13)
+	var $app_script$ = __webpack_require__(14)
+	
+	$app_define$('@app-component/footer', [], function($app_require$, $app_exports$, $app_module$){
+	     $app_script$($app_module$, $app_exports$, $app_require$)
+	     if ($app_exports$.__esModule && $app_exports$.default) {
+	            $app_module$.exports = $app_exports$.default
+	        }
+	     $app_module$.exports.template = $app_template$
+	     $app_module$.exports.style = $app_style$
+	})
+
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "div",
+	  "type": "tabs",
 	  "attr": {},
 	  "classList": [
-	    "layered"
+	    "bot-for"
 	  ],
 	  "children": [
 	    {
-	      "type": "slot",
-	      "attr": {}
-	    },
-	    {
-	      "type": "tabs",
+	      "type": "tab-bar",
 	      "attr": {},
+	      "classList": [
+	        "footer-wrap"
+	      ],
 	      "children": [
 	        {
-	          "type": "tab-bar",
+	          "type": "block",
 	          "attr": {},
-	          "classList": [
-	            "footer-wrap"
-	          ],
+	          "repeat": {
+	            "exp": function () {return this.footerList},
+	            "key": "index",
+	            "value": "item"
+	          },
 	          "children": [
 	            {
-	              "type": "block",
+	              "type": "div",
 	              "attr": {},
-	              "repeat": {
-	                "exp": function () {return this.footerList},
-	                "key": "index",
-	                "value": "item"
+	              "classList": [
+	                "item"
+	              ],
+	              "events": {
+	                "click": function (evt) {this.routes(this.item,this.index,evt)}
 	              },
 	              "children": [
 	                {
-	                  "type": "div",
-	                  "attr": {},
-	                  "classList": [
-	                    "item"
-	                  ],
-	                  "events": {
-	                    "click": function (evt) {this.routes(this.item,this.index,evt)}
+	                  "type": "image",
+	                  "attr": {
+	                    "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
 	                  },
-	                  "children": [
-	                    {
-	                      "type": "image",
-	                      "attr": {
-	                        "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
-	                      },
-	                      "classList": [
-	                        "icon"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.pages}
-	                      },
-	                      "classList": [
-	                        "pages"
-	                      ]
-	                    }
+	                  "classList": [
+	                    "icon"
+	                  ]
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.item.pages}
+	                  },
+	                  "classList": [
+	                    "pages"
 	                  ]
 	                }
 	              ]
@@ -283,25 +292,25 @@
 	}
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  ".layered": {
-	    "flex": 1
-	  },
-	  ".layered .footer-wrap": {
-	    "flex": 1,
+	  ".bot-for": {
 	    "position": "fixed",
+	    "left": "0px",
 	    "bottom": "0px",
-	    "flexDirection": "row",
+	    "height": "100px",
+	    "flex": 1,
+	    "flexDirection": "row"
+	  },
+	  ".bot-for .footer-wrap": {
 	    "backgroundColor": "#FFFFFF",
 	    "borderTopWidth": "1px",
 	    "borderTopColor": "#eeeeee",
 	    "borderRightColor": "#eeeeee",
 	    "borderBottomColor": "#eeeeee",
 	    "borderLeftColor": "#eeeeee",
-	    "height": "100px",
 	    "borderRightWidth": "1px",
 	    "borderBottomWidth": "1px",
 	    "borderLeftWidth": "1px",
@@ -312,7 +321,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -327,7 +336,7 @@
 	      ]
 	    }
 	  },
-	  ".layered .footer-wrap .item": {
+	  ".bot-for .footer-wrap .item": {
 	    "flex": 1,
 	    "lineHeight": "100px",
 	    "fontSize": "32px",
@@ -341,7 +350,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -366,7 +375,7 @@
 	      ]
 	    }
 	  },
-	  ".layered .footer-wrap .item .icon": {
+	  ".bot-for .footer-wrap .item .icon": {
 	    "width": "50px",
 	    "height": "50px",
 	    "flexShrink": 0,
@@ -377,7 +386,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -412,7 +421,7 @@
 	      ]
 	    }
 	  },
-	  ".layered .footer-wrap .item .pages": {
+	  ".bot-for .footer-wrap .item .pages": {
 	    "marginTop": "3px",
 	    "color": "#666666",
 	    "fontSize": "24px",
@@ -424,7 +433,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -462,7 +471,7 @@
 	}
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -514,7 +523,54 @@
 	};}
 
 /***/ },
-/* 14 */
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  "type": "div",
+	  "attr": {},
+	  "classList": [
+	    "layered"
+	  ],
+	  "children": [
+	    {
+	      "type": "slot",
+	      "attr": {}
+	    },
+	    {
+	      "type": "footer",
+	      "attr": {
+	        "active": function () {return this.active||0}
+	      }
+	    }
+	  ]
+	}
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  ".layered": {
+	    "flex": 1
+	  }
+	}
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = function(module, exports, $app_require$){'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	exports.default = {
+			props: ['active']
+	};}
+
+/***/ },
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -754,7 +810,7 @@
 	}
 
 /***/ },
-/* 15 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1564,7 +1620,7 @@
 	}
 
 /***/ },
-/* 16 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1589,7 +1645,7 @@
 	
 	var _system8 = _interopRequireDefault(_system7);
 	
-	var _util = __webpack_require__(17);
+	var _util = __webpack_require__(21);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -1715,7 +1771,7 @@
 	};}
 
 /***/ },
-/* 17 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';

@@ -47,11 +47,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(10)
-	__webpack_require__(18)
-	var $app_template$ = __webpack_require__(22)
-	var $app_style$ = __webpack_require__(23)
-	var $app_script$ = __webpack_require__(24)
+	__webpack_require__(22)
+	__webpack_require__(11)
+	var $app_template$ = __webpack_require__(26)
+	var $app_style$ = __webpack_require__(27)
+	var $app_script$ = __webpack_require__(28)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -191,14 +191,15 @@
 	};}
 
 /***/ },
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(11)
-	var $app_style$ = __webpack_require__(12)
-	var $app_script$ = __webpack_require__(13)
+	var $app_template$ = __webpack_require__(12)
+	var $app_style$ = __webpack_require__(13)
+	var $app_script$ = __webpack_require__(14)
 	
-	$app_define$('@app-component/layered', [], function($app_require$, $app_exports$, $app_module$){
+	$app_define$('@app-component/footer', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
 	     if ($app_exports$.__esModule && $app_exports$.default) {
 	            $app_module$.exports = $app_exports$.default
@@ -209,68 +210,58 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "div",
+	  "type": "tabs",
 	  "attr": {},
 	  "classList": [
-	    "layered"
+	    "bot-for"
 	  ],
 	  "children": [
 	    {
-	      "type": "slot",
-	      "attr": {}
-	    },
-	    {
-	      "type": "tabs",
+	      "type": "tab-bar",
 	      "attr": {},
+	      "classList": [
+	        "footer-wrap"
+	      ],
 	      "children": [
 	        {
-	          "type": "tab-bar",
+	          "type": "block",
 	          "attr": {},
-	          "classList": [
-	            "footer-wrap"
-	          ],
+	          "repeat": {
+	            "exp": function () {return this.footerList},
+	            "key": "index",
+	            "value": "item"
+	          },
 	          "children": [
 	            {
-	              "type": "block",
+	              "type": "div",
 	              "attr": {},
-	              "repeat": {
-	                "exp": function () {return this.footerList},
-	                "key": "index",
-	                "value": "item"
+	              "classList": [
+	                "item"
+	              ],
+	              "events": {
+	                "click": function (evt) {this.routes(this.item,this.index,evt)}
 	              },
 	              "children": [
 	                {
-	                  "type": "div",
-	                  "attr": {},
-	                  "classList": [
-	                    "item"
-	                  ],
-	                  "events": {
-	                    "click": function (evt) {this.routes(this.item,this.index,evt)}
+	                  "type": "image",
+	                  "attr": {
+	                    "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
 	                  },
-	                  "children": [
-	                    {
-	                      "type": "image",
-	                      "attr": {
-	                        "src": function () {return (this.index==this.active)?this.item.img[1]:this.item.img[0]}
-	                      },
-	                      "classList": [
-	                        "icon"
-	                      ]
-	                    },
-	                    {
-	                      "type": "text",
-	                      "attr": {
-	                        "value": function () {return this.item.pages}
-	                      },
-	                      "classList": [
-	                        "pages"
-	                      ]
-	                    }
+	                  "classList": [
+	                    "icon"
+	                  ]
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.item.pages}
+	                  },
+	                  "classList": [
+	                    "pages"
 	                  ]
 	                }
 	              ]
@@ -283,25 +274,25 @@
 	}
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  ".layered": {
-	    "flex": 1
-	  },
-	  ".layered .footer-wrap": {
-	    "flex": 1,
+	  ".bot-for": {
 	    "position": "fixed",
+	    "left": "0px",
 	    "bottom": "0px",
-	    "flexDirection": "row",
+	    "height": "100px",
+	    "flex": 1,
+	    "flexDirection": "row"
+	  },
+	  ".bot-for .footer-wrap": {
 	    "backgroundColor": "#FFFFFF",
 	    "borderTopWidth": "1px",
 	    "borderTopColor": "#eeeeee",
 	    "borderRightColor": "#eeeeee",
 	    "borderBottomColor": "#eeeeee",
 	    "borderLeftColor": "#eeeeee",
-	    "height": "100px",
 	    "borderRightWidth": "1px",
 	    "borderBottomWidth": "1px",
 	    "borderLeftWidth": "1px",
@@ -312,7 +303,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -327,7 +318,7 @@
 	      ]
 	    }
 	  },
-	  ".layered .footer-wrap .item": {
+	  ".bot-for .footer-wrap .item": {
 	    "flex": 1,
 	    "lineHeight": "100px",
 	    "fontSize": "32px",
@@ -341,7 +332,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -366,7 +357,7 @@
 	      ]
 	    }
 	  },
-	  ".layered .footer-wrap .item .icon": {
+	  ".bot-for .footer-wrap .item .icon": {
 	    "width": "50px",
 	    "height": "50px",
 	    "flexShrink": 0,
@@ -377,7 +368,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -412,7 +403,7 @@
 	      ]
 	    }
 	  },
-	  ".layered .footer-wrap .item .pages": {
+	  ".bot-for .footer-wrap .item .pages": {
 	    "marginTop": "3px",
 	    "color": "#666666",
 	    "fontSize": "24px",
@@ -424,7 +415,7 @@
 	          "n": "class",
 	          "i": false,
 	          "a": "element",
-	          "v": "layered"
+	          "v": "bot-for"
 	        },
 	        {
 	          "t": "d"
@@ -462,7 +453,7 @@
 	}
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -514,17 +505,20 @@
 	};}
 
 /***/ },
-/* 14 */,
 /* 15 */,
 /* 16 */,
 /* 17 */,
-/* 18 */
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(6)
-	var $app_template$ = __webpack_require__(19)
-	var $app_style$ = __webpack_require__(20)
-	var $app_script$ = __webpack_require__(21)
+	var $app_template$ = __webpack_require__(23)
+	var $app_style$ = __webpack_require__(24)
+	var $app_script$ = __webpack_require__(25)
 	
 	$app_define$('@app-component/contents', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -537,7 +531,7 @@
 
 
 /***/ },
-/* 19 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -547,8 +541,7 @@
 	    {
 	      "type": "list",
 	      "attr": {
-	        "id": "listdata",
-	        "scrollpage": function () {return this.scrollPage}
+	        "id": "listdata"
 	      },
 	      "repeat": function () {return this.channelArr},
 	      "id": "listdata",
@@ -710,7 +703,7 @@
 	}
 
 /***/ },
-/* 20 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1288,7 +1281,7 @@
 	}
 
 /***/ },
-/* 21 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1458,18 +1451,14 @@
 	};}
 
 /***/ },
-/* 22 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = {
-	  "type": "layered",
-	  "attr": {
-	    "active": function () {return this.current||0},
-	    "id": "container"
-	  },
-	  "id": "container",
+	  "type": "div",
+	  "attr": {},
 	  "classList": [
-	    "container"
+	    "layered"
 	  ],
 	  "children": [
 	    {
@@ -1536,19 +1525,30 @@
 	          }
 	        }
 	      ]
+	    },
+	    {
+	      "type": "footer",
+	      "attr": {
+	        "active": function () {return this.current||0}
+	      }
 	    }
 	  ]
 	}
 
 /***/ },
-/* 23 */
+/* 27 */
 /***/ function(module, exports) {
 
 	module.exports = {
+	  ".layered": {
+	    "flex": 1
+	  },
 	  ".tabs-wrap": {
-	    "backgroundColor": "#ffffff",
 	    "height": "100%",
-	    "flexDirection": "column"
+	    "flexDirection": "column",
+	    "position": "fixed",
+	    "left": "0px",
+	    "top": "0px"
 	  },
 	  ".tabs-wrap .tabs-item": {
 	    "flexDirection": "row",
@@ -1559,6 +1559,7 @@
 	    "borderBottomColor": "#cccccc",
 	    "borderLeftColor": "#cccccc",
 	    "position": "fixed",
+	    "left": "0px",
 	    "top": "0px",
 	    "_meta": {
 	      "ruleDef": [
@@ -1760,7 +1761,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -1788,6 +1789,10 @@
 	var _system9 = $app_require$('@app-module/system.app');
 	
 	var _system10 = _interopRequireDefault(_system9);
+	
+	var _system11 = $app_require$('@app-module/system.router');
+	
+	var _system12 = _interopRequireDefault(_system11);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1825,7 +1830,6 @@
 			this.listData = {};
 			this.listData = e.detail;
 		},
-		scroll: function scroll(e) {},
 		loadBanner: function loadBanner() {
 			var self = this;
 			_system2.default.fetch({

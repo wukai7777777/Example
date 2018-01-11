@@ -1,10 +1,11 @@
 
 <!-- <import src="../common/components/swiper.mix" name="banner"></import> -->
-<import src="../common/components/layered.mix" name="layered"></import>
+<!-- <import src="../common/components/layered.mix" name="layered"></import> -->
 <import src="../common/components/tbk-contents.mix" name="contents"></import>
+<import src="../common/components/footer.mix" name="footer"></import>
 <template>
 	<!-- <refresh onrefresh="refresh" refreshing="{{isRefreshing}}"> -->
-		<layered active="{{current || 0}}" id="container" class="container">
+		<!-- <layered active="{{current || 0}}" id="container" class="container"> -->
 				<!-- <div class="swiper-wrap" ondisappear="showMask" onappear="hideMask" show="bannerData.length>0">
 					<banner banners="{{bannerData}}" interval="{{interval}}" auto-play="{{autoPlay}}" indicator="{{indicator}}"></banner>
 				</div> -->
@@ -19,19 +20,19 @@
 						</tab-bar>
 					</tabs>
 				</div> -->
-
-				<tabs class="tabs-wrap" onchange="changeIndex" index="{{curIndex}}">
-					<tab-bar mode="scrollable" class="tabs-item">
-						<div class="channels" for="{{(index, item) in channels}}">
-							<text class="text">{{item.text}}</text>
-							<div class="line {{index == curIndex ? 'active' : ''}}"></div>
-						</div>
-					</tab-bar>
-					<contents scroll-page="{{scrollPage || true}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></contents>
-				</tabs>
-
-				<!-- <tbk-list scroll-page="{{scrollPage}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></tbk-list> -->
-		</layered>
+				<div class="layered">
+					<tabs class="tabs-wrap" onchange="changeIndex" index="{{curIndex}}">
+						<tab-bar mode="scrollable" class="tabs-item">
+							<div class="channels" for="{{(index, item) in channels}}">
+								<text class="text">{{item.text}}</text>
+								<div class="line {{index == curIndex ? 'active' : ''}}"></div>
+							</div>
+						</tab-bar>
+						<contents scroll-page="{{scrollPage || true}}" list-datas="{{listData}}" @channeldata="getListData" cur-index="{{curIndex}}" channel-arr="{{channels}}"></contents>
+					</tabs>
+					<footer active="{{current || 0}}"></footer>
+				</div>
+		<!-- </layered> -->
 	<!-- </refresh> -->
 </template>
 
@@ -41,6 +42,7 @@
 	import prompt from '@system.prompt'
 	import webview from '@system.webview'
 	import app from '@system.app'
+	import router from '@system.router'
 
 	export default {
 		props: ['current'],
@@ -79,9 +81,6 @@
 			this.listData = e.detail;
 			// console.log(22222)
 			// console.log(e.detail[this.channels[this.curIndex].channel], 999)
-		},
-		scroll(e) {
-			//console.log(e.scrollY, 88888)
 		},
 		// 拉取banner数据
 		loadBanner() {
@@ -167,16 +166,23 @@
 </script>
 
 <style lang="less">
+	.layered{
+		flex: 1;
+	}
 	.tabs-wrap{
-		background-color: #ffffff;
+		/*background-color: rgba(255, 0, 0, 0.5);*/
 		height: 100%;
 		flex-direction: column;
+		position:fixed;
+		left: 0;
+		top: 0px;
 		.tabs-item{
 			flex-direction: row;
 			flex: 1;
 			border-bottom-width: 1px ;
 			border-color: #cccccc;
 			position:fixed;
+			left: 0;
 			top: 0px;
 			.channels{
 				flex: 1;

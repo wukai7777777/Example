@@ -1,7 +1,7 @@
 <import src="./bottom-loading.mix" name="bottom-loading"></import>
 <template>
 	<tab-content>
-		<list for="{{channelArr}}" id="listdata" onscrollBottom="getDateList" scrollpage="{{scrollPage}}" class="datalist {{isShow ? 'padbot' : ''}}">
+		<list for="{{channelArr}}" id="listdata" onscrollBottom="getDateList" class="datalist {{isShow ? 'padbot' : ''}}">
 			<!-- <list-item type="ceshi">
 				<text class="" style="background-color: red">
 					{{scrollPage}}

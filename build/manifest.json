@@ -85,7 +85,7 @@
     "logLevel": "debug"
   },
   "router": {
-    "entry": "taobaoke-tabs",
+    "entry": "taobaoke",
     "pages": {
       "taobaoke": {
         "component": "index"
