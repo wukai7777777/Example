@@ -21,7 +21,7 @@
 					</tabs>
 				</div> -->
 				<div class="layered">
-					<tabs class="tabs-wrap" onchange="changeIndex" index="{{curIndex}}">
+					<tabs class="tabs-wrap" onchange="changeIndex">
 						<tab-bar mode="scrollable" class="tabs-item">
 							<div class="channels" for="{{(index, item) in channels}}">
 								<text class="text">{{item.text}}</text>

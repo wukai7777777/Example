@@ -1463,9 +1463,7 @@
 	  "children": [
 	    {
 	      "type": "tabs",
-	      "attr": {
-	        "index": function () {return this.curIndex}
-	      },
+	      "attr": {},
 	      "classList": [
 	        "tabs-wrap"
 	      ],
